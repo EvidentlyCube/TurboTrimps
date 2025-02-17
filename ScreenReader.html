@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-	<title>Trimps 5.9.2 (Screen Reader version)</title>
+	<title>Trimps 5.10.1 (Screen Reader version)</title>
 	<meta name="description" content="Trimps">
 	<meta name="author" content="Greensatellite">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="fonts/icomoon/style.css">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="css/style.css?38" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?39" />
 </head>
 <!-- 		Trimps
-		Copyright (C) 2023 Zach Hood
+		Copyright (C) 2025 Zach Hood
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -36,6 +36,15 @@
 		If you are not using any addons that might interfere with javascript, try using the latest versions of Chrome or Firefox. 
 	</div>
 	</noscript>
+	<div id="screenReaderInfo" class="visually-hidden">
+		<h6>Screen Reader Information</h6>
+		This game uses several different ways to show additional information in tooltips.<br>
+		shift+/ will work on all elements, but requires focus, and specific NVDA settings. All elements with additional information are focusable with tab.<br>
+		shift+enter works only on button elements, not clickable. It does not require focus.<br>
+		You can also enable separate info buttons, which will respond to enter.<br>
+		To enable shift+/ tooltips, Turn NVDA + 8 on, and disable NVDA: Settings > browse mode: Disable "trap all command gestures from reaching the document."<br>
+		You can show/hide this information via the game setting "Show Screen Read Info."<br>
+	</div>
 	<div id="offlineWrapper">
 		<div id="offlineInnerWrapper">
 			<div id="offlineTitle">
@@ -58,22 +67,22 @@
 				<div id='offlineMapBtns' class='col-xs-6'>
 					<div id='offlineMapText' style='text-align: center;'>Wanna run a map?</div>
 					<div id='offlineMapBtnsInner'>
-						<span id="offlineMapBtn0" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(0);">World Level Map</span>
-						<span id="offlineMapBtn1" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(-1);">-1 Level map</span>
-						<span id="offlineMapBtn2" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(-2);">-2 Level map</span>
-						<span id="offlineMapBtn3" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(-3);">-3 Level map</span>
+						<button id="offlineMapBtn0" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(0);">World Level Map</button>
+						<button id="offlineMapBtn1" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(-1);">-1 Level map</button>
+						<button id="offlineMapBtn2" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(-2);">-2 Level map</button>
+						<button id="offlineMapBtn3" class="offlineMapBtn btn btn-md btn-success" onclick="offlineProgress.runFirstMap(-3);">-3 Level map</button>
 					</div>
 				</div>
 				<div id='offlineZoneBtns' class='col-xs-6'>
 					<div id='offlineInMapDescription' style='text-align: center;'></div>
-					<span id='offlineZoneBtn' onclick="offlineProgress.leaveMap();" class="offlineExtraBtn btn btn-md btn-primary">Back to World</span>
+					<button id='offlineZoneBtn' onclick="offlineProgress.leaveMap();" class="offlineExtraBtn btn btn-md btn-primary">Back to World</button>
 				</div>
 				<div id='offlineExtraBtnsContainer' class='col-xs-6' style='position: absolute; left: 50%; width: 25%;'>
 					<div id='offlineTimeOffline'></div>
-					<div class='btn btn-lg btn-info offlineExtraBtn' onclick="tooltip('Lost Time', null, 'update');">What is This?!</div>
-					<div class='btn btn-lg btn-danger offlineExtraBtn' onclick='offlineProgress.finish()'>Stop Here</div>
-					<div class='btn btn-lg btn-warning offlineExtraBtn' id='offlineEqualityBtn' onclick='offlineProgress.showEquality()'>Show Equality</div>
-					<div class='btn btn-lg btn-primary offlineExtraBtn' id='offlineFightBtn' onclick='offlineProgress.fightClicked()'>Start Fighting</div>
+					<button class='btn btn-lg btn-info offlineExtraBtn' onclick="tooltip('Lost Time', null, 'update');">What is This?!</button>
+					<button class='btn btn-lg btn-danger offlineExtraBtn' onclick='offlineProgress.finish()'>Stop Here</button>
+					<button class='btn btn-lg btn-warning offlineExtraBtn' id='offlineEqualityBtn' onclick='offlineProgress.showEquality()'>Show Equality</button>
+					<button class='btn btn-lg btn-primary offlineExtraBtn' id='offlineFightBtn' onclick='offlineProgress.fightClicked()'>Start Fighting</button>
 					<div id='offlineFormations'></div>
 					<div id='offlineSettingContainer'></div>
 					<div id='offlineEffective'></div>
@@ -166,7 +175,7 @@
 				<div class="row resourceRow">
 					<div class="col-xs-6 maxH">
 						<div id="food" class="playerGather">
-							<div id="boneShrineBtn" style="display: none" class="isEmpty noselect" onmouseover="tooltip('Bone Shrine', null, event)" onclick="game.permaBoneBonuses.boosts.consume()" onmouseout="tooltip('hide')"></div>
+							<button id="boneShrineBtn" style="display: none" class="isEmpty noselect" onclick="game.permaBoneBonuses.boosts.consume()"></button>
 							<h1 class="title">Food</h1>
 							<span class="ownedArea bdHover" onclick="getMaxResources('Food')"><span id="foodOwned">0</span> / <span id="foodMax"></span></span>
 							<br/>
@@ -177,7 +186,7 @@
 							</div>
 							<div class="row collectRow">
 								<div class="col-xs-6">
-									<div role="button" id="foodCollectBtn" class="workBtn workColorOff pointer noselect" onclick="setGather('food')">Gather</div>
+									<button id="foodCollectBtn" class="workBtn workColorOff pointer noselect" onclick="setGather('food')">Gather</button>
 								</div>
 								<div class="col-xs-6">
 									<span class="psText sizeSecRegular pointer noselect" id="foodPs" onclick="getPsString('food')">+0/sec</span>
@@ -199,7 +208,7 @@
 
 							<div class="row collectRow">
 								<div class="col-xs-6">
-									<div id="woodCollectBtn" role="button" class="workBtn workColorOff pointer noselect" onclick="setGather('wood')">Chop</div>
+									<button id="woodCollectBtn" class="workBtn workColorOff pointer noselect" onclick="setGather('wood')">Chop</button>
 								</div>
 								<div class="col-xs-6">
 									<span class="psText sizeSecRegular pointer noselect" id="woodPs" onclick="getPsString('wood')">+0/sec</span>
@@ -221,7 +230,7 @@
 							</div>
 							<div class="row collectRow">
 								<div class="col-xs-6">
-									<div id="metalCollectBtn" role="button" class="workBtn workColorOff pointer noselect" onclick="setGather('metal')">Mine</div>
+									<button id="metalCollectBtn" class="workBtn workColorOff pointer noselect" onclick="setGather('metal')">Mine</button>
 								</div>
 								<div class="col-xs-6">
 									<span class="psText sizeSecRegular pointer noselect" id="metalPs" onclick="getPsString('metal')">+0/sec</span>
@@ -236,7 +245,7 @@
 							<br/>
 							<div class="row collectRow">
 								<div class="col-xs-6">
-									<div id="scienceCollectBtn" role="button" class="workBtn workColorOff pointer noselect" onclick="setGather('science')">Research</div>
+									<button id="scienceCollectBtn" class="workBtn workColorOff pointer noselect" onclick="setGather('science')">Research</button>
 								</div>
 								<div class="col-xs-6">
 									<span class="psText sizeSecRegular pointer noselect" id="sciencePs" onclick="getPsString('science')">+0/sec</span>
@@ -266,14 +275,14 @@
 					<br/>
 					<span class="ownedArea"><span id="heliumOwned">0</span></span>
 					<br/>
-					<span id="heliumPh" onmouseover="tooltip('Helium Per Hour', null, event)" onmouseout="tooltip('hide')" class="heliumPh hePhColorNormal"></span>					
+					<span id="heliumPh"  class="heliumPh hePhColorNormal"></span>					
 				</div>
 			</div>
 			<div class="col-xs-2" id="trimpsColumn">
 				<div id="trimps" class="playerGather" style="visibility: hidden;">
 					<div class="row">
 						<div class="col-xs-3" style="padding-right: 0">
-							<div id="turkimpBuff" style="display: none" onmouseover="tooltip('Well Fed', null, event)" onmouseout="tooltip('hide')">
+							<div id="turkimpBuff" style="display: none" >Turkimp
 								<span class="icomoon icon-spoon-knife"></span><br/><span id="turkimpTime"></span>
 							</div>
 						</div>
@@ -283,8 +292,8 @@
 							</div>
 						</div>
 						<div class="col-xs-3" style="padding-left: 0">
-							<div id="fluffyBox" style="display: none" onmouseover="tooltip('Fluffy', null, event)" onmouseout="tooltip('hide')" onclick="tooltip('Fluffy', null, 'update')">
-								<span class="fluffyIcon glyphicon glyphicon-user"></span>&nbsp;Lv<span id='fluffyLevel'></span><br/><div class="progress" id="fluffyExpContainer"><span class="progress-bar noTransition" id="fluffyExp">&nbsp;</span></div>
+							<div id="fluffyBox" style="display: none"  onclick="tooltip('Fluffy', null, 'update')">
+								<span class="fluffyIcon glyphicon glyphicon-user"></span>Fluffy Level<span id='fluffyLevel'></span><br/><div class="progress" id="fluffyExpContainer"><span class="progress-bar noTransition" id="fluffyExp">&nbsp;</span></div>
 							</div>
 						</div>
 					</div>
@@ -303,7 +312,7 @@
 						<span id="trimpsEmployed">0</span>/<span id="maxEmployed">0</span> employed
 					</div>
 					<div id="trapArea">
-						<div id="trimpsCollectBtn" role="button" class="workBtn workColorOff pointer noSelect" onclick="setGather('trimps')">Check&nbsp;Traps&nbsp;(<span id="trimpTrapText">1</span>)</div>
+						<button id="trimpsCollectBtn" class="workBtn workColorOff pointer noSelect" onclick="setGather('trimps')">Check&nbsp;Traps&nbsp;(<span id="trimpTrapText">1</span>)</button>
 						<div id="trimpsCollecting" class="collecting" style="display: none">Trapping (<span id="trimpTrapText2">1</span>)</div>
 						<div class="progress" id="trappingProgress">
 							<div class="progress-bar" id="trappingBar" role="progressbar"></div>
@@ -315,19 +324,19 @@
 				<div id="logContainer">
 					<div class="btn-group btn-group-justified" id="logBtnGroup" role="group">
 						<div class="btn-group" role="group">
-							<button id="StoryFilter" onclick="filterMessage('Story')" type="button" class="btn btn-success logFlt">Story</button>
+							<button id="StoryFilter" onclick="filterMessage('Story')" class="btn btn-success logFlt">Story</button>
 						</div>
 						<div class="btn-group" role="group">
-							<button id="LootFilter" onclick="filterMessage('Loot')" type="button" class="btn btn-success logFlt">Loot</button>
+							<button id="LootFilter" onclick="filterMessage('Loot')" class="btn btn-success logFlt">Loot</button>
 						</div>
 						<div class="btn-group" role="group">
-							<button id="UnlocksFilter" onclick="filterMessage('Unlocks')" type="button" class="btn btn-success logFlt">Unlocks</button>
+							<button id="UnlocksFilter" onclick="filterMessage('Unlocks')" class="btn btn-success logFlt">Unlocks</button>
 						</div>
 						<div class="btn-group" role="group">
-							<button id="CombatFilter" type="button" onclick="filterMessage('Combat')" class="btn btn-success logFlt">Combat</button>
+							<button id="CombatFilter"  onclick="filterMessage('Combat')" class="btn btn-success logFlt">Combat</button>
 						</div>
 						<div id="logConfigHolder" class="btn-group" role="group">
-							<button title="Configure Displayed Messages" id="logConfigBtn" type="button" onclick="tooltip('Message Config', null, 'update')" class="btn btn-default logFlt"><span class='glyphicon glyphicon-cog'></span></button>
+							<button aria-label="Configure Displayed Messages" id="logConfigBtn" onclick="tooltip('Message Config', null, 'update')" class="btn btn-default logFlt"><span class='glyphicon glyphicon-cog'></span></button>
 						</div>						
 					</div>
 					<div id="achievementTracker">
@@ -370,7 +379,7 @@
 							<div id="autoTrapBtn" style="display: none" onclick="toggleAutoTrap()" class="pointer noselect colorDanger autoUpgradeBtn">AutoTraps Off</div>
 						</div>
 						<div class="col-xs-3">
-							<h1><div role="button" id="buildingsCollectBtn" onclick="setGather('buildings')" class="workBtn workColorOff pointer noselect">Build Buildings</div></h1>
+							<h1><button id="buildingsCollectBtn" onclick="setGather('buildings')" class="workBtn workColorOff pointer noselect">Build Buildings</button></h1>
 						</div>
 					</div>
 					<div class="queue niceScroll" id="buildingsQueue">
@@ -379,42 +388,42 @@
 				</div>
 				<div id="outerBuyContainer">	
 				<div id="buyTabs">
-					<ul id="buyTabsUl" class="nav nav-tabs nav-justified buyTabsUl">
-						<li role="presentation" id="allTab" onclick="filterTabs('all')" class="tabNotSelected buyTab"><a id="allA">All</a></li>
-						<li role="presentation" id="buildingsTab" onclick="filterTabs('buildings')" class="tabNotSelected buyTab"><a id="buildingsA"><span id="buildingsAlert" class="alert badge"></span>Buildings</a></li>
-						<li role="presentation" id="jobsTab" style="visibility: hidden" onclick="filterTabs('jobs')" class="tabNotSelected buyTab"><a id="jobsA"><span id="jobsAlert" class="alert badge"></span>Jobs</a></li>
-						<li role="presentation" id="upgradesTab" style="visibility: hidden" onclick="filterTabs('upgrades')" class="tabNotSelected buyTab"><a id="upgradesA"><span id="upgradesAlert" class="alert badge"></span>Upgrades</a></li>
-						<li role="presentation" id="equipmentTab" style="visibility: hidden" onclick="filterTabs('equipment')" class="tabNotSelected buyTab"><a id="equipmentA"><span id="equipmentAlert" class="alert badge"></span>Equipment</a></li>		
+					<ul id="buyTabsUl" class="nav nav-tabs nav-justified buyTabsUl" aria-label="Buy Tabs">
+						<li id="allTab" onclick="filterTabs('all')" class="tabNotSelected buyTab"><a id="allA">All</a></li>
+						<li id="buildingsTab" onclick="filterTabs('buildings')" class="tabNotSelected buyTab"><a id="buildingsA"><span id="buildingsAlert" class="alert badge"></span>Buildings</a></li>
+						<li id="jobsTab" style="visibility: hidden" onclick="filterTabs('jobs')" class="tabNotSelected buyTab"><a id="jobsA"><span id="jobsAlert" class="alert badge"></span>Jobs</a></li>
+						<li id="upgradesTab" style="visibility: hidden" onclick="filterTabs('upgrades')" class="tabNotSelected buyTab"><a id="upgradesA"><span id="upgradesAlert" class="alert badge"></span>Upgrades</a></li>
+						<li id="equipmentTab" style="visibility: hidden" onclick="filterTabs('equipment')" class="tabNotSelected buyTab"><a id="equipmentA"><span id="equipmentAlert" class="alert badge"></span>Equipment</a></li>		
 					</ul>
-					<ul id="buyTabsUl2" class="nav nav-tabs nav-justified buyTabsUl">
-						<li role="presentation" id="talentsTab" style='display: none' onclick="filterTabs('talents')" class="tabNotSelected buyTab" onmouseover="tooltip('Mastery', null, event)" onmouseout="tooltip('hide')"><a id="talentA"><span id="talentsAlert" class="alert badge"></span><span id="mutatorsAlert" class="alert badge"></span><span id='MasteryTabName'>Mastery</span><span id="talentsEssenceTotal"></span></a></li>		
-						<li role="presentation" id="equalityTab" style='display: none'  onclick="tooltip('Scale Equality Scaling', null, 'update', true)" class="tabNotSelected equalityTabScaling buyTab" onmouseover="tooltip('Equality Scaling', null, event, true)" onmouseout="tooltip('hide')"><a id="equalityA">Equality</a></li>		
-						<li role="presentation" id="natureTab" style='display: none'  onclick="filterTabs('nature')" class="tabNotSelected buyTab empowerTabNone" onmouseover="tooltip('Empowerments of Nature', null, event)" onmouseout="tooltip('hide')"><a id="natureA">Nature</a></li>		
-						<li role="presentation" id="playerSpireTab" style='display: none' onclick="playerSpire.openPopup()" class="tabNotSelected buyTab pausedSpireNo"><a id="spireA">Spire</a></li>
-						<li role="presentation" id="alchemyTab" style='display: none' onclick="alchObj.openPopup()" class="tabNotSelected buyTab alchTabNone"><a id="alchemyA">Alchemy</a></li>
-						<li role="presentation" id="autoBattleTab" style='display: none' onclick="autoBattle.popup()" class="tabNotSelected buyTab abTabNone"><a id="autoBattleA">SA</a></li>
+					<ul id="buyTabsUl2" class="nav nav-tabs nav-justified buyTabsUl" aria-label="Features Tabs">
+						<li id="talentsTab" style='display: none' onclick="filterTabs('talents')" class="tabNotSelected buyTab" ><a id="talentA"><span id="talentsAlert" class="alert badge"></span><span id="mutatorsAlert" class="alert badge"></span><span id='MasteryTabName'>Mastery</span><span id="talentsEssenceTotal"></span></a></li>		
+						<li id="equalityTab" style='display: none'  onclick="tooltip('Scale Equality Scaling', null, 'update', true)" class="tabNotSelected equalityTabScaling buyTab" ><a id="equalityA">Equality</a></li>		
+						<li id="natureTab" style='display: none'  onclick="filterTabs('nature')" class="tabNotSelected buyTab empowerTabNone" ><a id="natureA">Nature</a></li>		
+						<li id="playerSpireTab" style='display: none' onclick="playerSpire.openPopup()" class="tabNotSelected buyTab pausedSpireNo"><a id="spireA">Spire</a></li>
+						<li id="alchemyTab" style='display: none' onclick="alchObj.openPopup()" class="tabNotSelected buyTab alchTabNone"><a id="alchemyA">Alchemy</a></li>
+						<li id="autoBattleTab" style='display: none' onclick="autoBattle.popup()" class="tabNotSelected buyTab abTabNone"><a id="autoBattleA">SA</a></li>
 					</ul>
 				</div>
 
 					<div id="numTabs" class="numTabs">
-						<ul class="nav nav-tabs nav-justified">
-							<li role="presentation" class="tabNotSelected" id="tab1" onclick="numTab(1)">
+						<ul class="nav nav-tabs nav-justified" aria-label="Buy Amount">
+							<li class="tabNotSelected" id="tab1" onclick="numTab(1)">
 								<a id="tab1Text">+1</a>
 							</li>
-							<li role="presentation" class="tabNotSelected" id="tab2" onclick="numTab(2)">
+							<li class="tabNotSelected" id="tab2" onclick="numTab(2)">
 								<a id="tab2Text">+10</a>
 							</li>
-							<li role="presentation" class="tabNotSelected" id="tab3" onclick="numTab(3)">
+							<li class="tabNotSelected" id="tab3" onclick="numTab(3)">
 								<a id="tab3Text">+25</a>
 							</li>
-							<li role="presentation" class="tabNotSelected" id="tab4" onclick="numTab(4)">
+							<li class="tabNotSelected" id="tab4" onclick="numTab(4)">
 								<a id="tab4Text">+100</a>
 							</li>
-							<li role="presentation" class="tabNotSelected" id="tab5">
+							<li class="tabNotSelected" id="tab5">
 								<a id="tab5Text" onclick="numTab(5)">+1</a>
 								<a id="tab5Text2" onclick="tooltip('Custom', null, 'update')">Custom</a>
 							</li>
-							<li role="presentation" class="tabNotSelected" id="tab6" onclick="numTab(6)" onmouseover="tooltip('Buy Max', 'customText', event, 'Switching to this option will spend the majority of your resources with each purchase. <b>Click twice to customize.</b>')" onmouseout="tooltip('hide')" >
+							<li class="tabNotSelected" id="tab6" onclick="numTab(6)"  >
 								<a id="tab6Text">Max</a>
 							</li>
 						</ul>
@@ -432,13 +441,14 @@
 										</div>
 										<div class="col-xs-3 lowPad">&nbsp;</div>
 										<div class="col-xs-3 lowPad">
-											<div id="autoStructureBtn" onmouseover='tooltip("AutoStructure", null, event)' onmouseout='tooltip("hide")' class="toggleConfigBtn pointer noselect colorDanger autoUpgradeBtn">
-												<div id='autoStructureText' onclick="toggleAutoStructure()">AutoStructure</div><div onclick="tooltip('Configure AutoStructure', null, 'update')">
-													<span class='glyphicon glyphicon-cog'></span></div>
+											<div id="autoStructureBtn" class="toggleConfigBtn pointer noselect colorDanger autoUpgradeBtn">
+												<div id='autoStructureText' onclick="toggleAutoStructure()">AutoStructure</div>
+												<div aria-label="Configure Auto Structure" onclick="tooltip('Configure AutoStructure', null, 'update')"><span class="glyphicon glyphicon-cog"></span></div>
 											</div>
+										
 										</div>
 										<div class="col-xs-3" style="padding-left: 5px">
-											<div id="autoStorageBtn" class="pointer noselect colorDanger autoUpgradeBtn" onmouseover="tooltip('AutoStorage', 'customText', event, 'Enabling this will cause your Trimps to automatically add a storage building to the queue if you reach max capacity. This will work on and offline if enabled.')" onmouseout="tooltip('hide')" onclick="toggleAutoStorage()">AutoStorage</div>
+											<div id="autoStorageBtn" class="pointer noselect colorDanger autoUpgradeBtn"  onclick="toggleAutoStorage()">AutoStorage</div>
 										</div>
 									</div>
 								</div>
@@ -455,15 +465,15 @@
 											<span id="jobsTitleUnemployed" class="titleSpan"></span>
 										</div>
 										<div class="col-xs-3 lowPad">
-											<div id="autoJobsBtn" onmouseover='tooltip("AutoJobs", null, event)' onmouseout='tooltip("hide")' class="toggleConfigBtn pointer noselect colorDanger autoUpgradeBtn">
-												<div id='autoJobsText' role="button" onclick="toggleAutoJobs()">AutoJobs</div><div role="button" title="Configure AutoJobs" onclick="tooltip('Configure AutoJobs', null, 'update')">
-													<span class='glyphicon glyphicon-cog'></span>
-												</div>
+											<div id="autoJobsBtn" class="toggleConfigBtn pointer noselect colorDanger autoUpgradeBtn">
+												<div id='autoJobsText' onclick="toggleAutoJobs()">AutoJobs</div>
+												<div aria-label="Configure AutoJobs" onclick="tooltip('Configure AutoJobs', null, 'update')"><span class='glyphicon glyphicon-cog'></span></div>
+												
 											</div>
 											
 										</div>
 										<div class="col-xs-3" style="padding-left: 5px">
-											<div id="fireBtn" class="pointer noselect fireBtnNotFiring" onclick="fireMode()" onmouseover="tooltip('Fire Trimps',null,event)" onmouseout="tooltip('hide')">Fire</div>
+											<div id="fireBtn" class="pointer noselect fireBtnNotFiring" onclick="fireMode()" >Fire</div>
 										</div>
 									</div>
 								</div>
@@ -477,15 +487,16 @@
 											<h2><span id="upgradesTitleSpan" class="titleSpan">Upgrades<br/>(Research first)</span></h2>
 										</div>
 										<div class="col-xs-3 lowPad">								
-											<div id="autoGoldenBtn" onmouseover="tooltip('AutoGold', null, event)" onmouseout="tooltip('hide')" class="pointer noselect settingBtn0 autoUpgradeBtn">
+											<div id="autoGoldenBtn"  class="pointer noselect settingBtn0 autoUpgradeBtn toggleConfigBtn">
 												<div id='autoGoldenText' onclick="toggleAutoGolden()">AutoGold</div>
+												<div id="goldConfig" aria-label="Configure Auto Golden" onclick="archoGolden.popup()"><span class="glyphicon glyphicon-cog"></span></div>
 											</div>
 										</div>
 										<div class="col-xs-3 lowPad">
-											<div id="autoPrestigeBtn" class="pointer noselect autoUpgradeBtn settingBtn0" onmouseover="tooltip('AutoPrestige', null, event)" onmouseout="tooltip('hide')" onclick="toggleAutoPrestiges()">AutoPrestige</div>
+											<div id="autoPrestigeBtn" class="pointer noselect autoUpgradeBtn settingBtn0"  onclick="toggleAutoPrestiges()">AutoPrestige</div>
 										</div>
 										<div class="col-xs-3" style="padding-left: 5px">
-											<div id="autoUpgradeBtn" class="pointer noselect colorDanger autoUpgradeBtn" onmouseover="tooltip('AutoUpgrade', null, event)" onmouseout="tooltip('hide')" onclick="toggleAutoUpgrades()">AutoUpgrade</div>
+											<div id="autoUpgradeBtn" class="pointer noselect colorDanger autoUpgradeBtn"  onclick="toggleAutoUpgrades()">AutoUpgrade</div>
 										</div>
 									</div>
 								</div>
@@ -501,9 +512,9 @@
 										<div class="col-xs-3 lowPad">&nbsp;</div>
 										<div class="col-xs-3 lowPad">&nbsp;</div>
 										<div class="col-xs-3" style="padding-left: 5px">
-											<div id="autoEquipBtn" onmouseover='tooltip("AutoEquip", null, event)' onmouseout='tooltip("hide")' class="toggleConfigBtn pointer noselect colorDanger autoUpgradeBtn">
-												<div id='autoEquipText' onclick="toggleAutoEquip()">AutoEquip</div><div onclick="tooltip('Configure AutoEquip', null, 'update')">
-													<span class='glyphicon glyphicon-cog'></span></div>
+											<div id="autoEquipBtn" class="toggleConfigBtn pointer noselect colorDanger autoUpgradeBtn">
+												<div id='autoEquipText' onclick="toggleAutoEquip()">AutoEquip</div>
+												<div aria-label="Configure Auto Equip" onclick="tooltip('Configure AutoEquip', null, 'update')"><span class='glyphicon glyphicon-cog'></span></div>
 											</div>
 										</div>
 									</div>
@@ -521,7 +532,7 @@
 										</div>
 									</div>
 									<div class='col-xs-3 lowPad'>
-										<div class='pointer noselect colorDanger' onmouseover='tooltip("Respec Masteries", null, event)' onmouseout='tooltip("hide")' onclick='respecTalents()' id='talentRespecBtn'>Respec (20 bones)</div>
+										<div class='pointer noselect colorDanger'  onclick='respecTalents()' id='talentRespecBtn'>Respec (20 bones)</div>
 									</div>
 								</div>
 								<div id="talentsCost">Your next mastery costs <span id='talentsNextCost'>0</span>.</div>
@@ -530,113 +541,107 @@
 							<div id="natureContainer" style="display: none; height: 100%;">
 								<div class='row noMarg' style="height: 100%;">
 									<div id='tabColPoison' class='col-xs-4 tabColPoison tabColNature noPad'>
-										<div class='natureTop'>
+										<button class='natureTop' id='natureInfoPoison'>
 											<div class='natureTitle'>
-												<span id='infoSpanPoison' class='infoSpanNature' onmouseover="natureTooltip(event, 'description', 'Poison')" onmouseout="tooltip('hide')"><span class='icomoon icon-info2'></span></span>
+												<span id='infoSpanPoison' class='infoSpanNature'><span class='icomoon icon-info2'></span></span>
 												Poison									
 											</div>
 											Tokens: <span id="tokenCountPoison">0</span>
-										</div>
-										<span class='natureBuyIcon noselect' onmouseover="natureTooltip(event, 'upgrade', 'Poison')" onmouseout="tooltip('hide');" onclick="naturePurchase('upgrade', 'Poison')">
+										</button>
+										<button class='natureBuyIcon noselect' id='natureUpgradePoisonBtn' onclick="naturePurchase('upgrade', 'Poison')">
 											<span class='natureUpgradeLevel' id='natureUpgradePoisonLevel'></span>
 											<span class='natureUpgradeCost' id='natureUpgradePoisonCost'></span>
 											<span class='natureBigIcon icomoon icon-plus'></span>
-										</span>
-										<span class='natureBuyIcon noselect' onmouseover="natureTooltip(event, 'stackTransfer', 'Poison')" onmouseout="tooltip('hide');" onclick="naturePurchase('stackTransfer', 'Poison')">
+										</button>
+										<button class='natureBuyIcon noselect' id='natureStackTransferPoisonBtn' onclick="naturePurchase('stackTransfer', 'Poison')">
 											<span class='natureUpgradeLevel' id='natureStackTransferPoisonLevel'></span>
 											<span class='natureUpgradeCost' id='natureStackTransferPoisonCost'></span>
 											<span class='natureBigIcon icomoon icon-rotate-left'></span>
-										</span>
-										<span id='uberPoisonContainer' class='natureBuyIcon natureUberContainer noselect' onmouseover="natureTooltip(event, 'uberEmpower', 'Poison')" onmouseout="tooltip('hide');" onclick="naturePurchase('uberEmpower', 'Poison')">
+										</button>
+										<button id='uberPoisonContainer' id='uberPoisonBtn' class='natureBuyIcon natureUberContainer noselect' onclick="naturePurchase('uberEmpower', 'Poison')">
 											<span class='natureUpgradeLevel natureUberName' id='uberPoisonName'></span>
 											<span class='natureUpgradeCost' id='natureUberEmpowerPoisonCost'></span>
 											<span class='natureBigIcon glyphicon glyphicon-king'></span>
-										</span>
+										</button>
 										<div class="transferButtons">
-											<span class='natureBuyIcon noselect natureBuyIconMini' onmouseover="natureTooltip(event, 'convert', 'Poison', 'Wind')" onmouseout="tooltip('hide');" onclick="naturePurchase('convert', 'Poison', 'Wind')">
+											<button class='natureBuyIcon noselect natureBuyIconMini' id='naturePoisonWindBtn' onclick="naturePurchase('convert', 'Poison', 'Wind')">
 												<span class='natureUpgradeCost' id='naturePoisonWindCost'></span>
-												<span class='natureSmallIcon icomoon icon-shuffle3'></span>
-												<span class='natureSmallIcon icomoon icon-air'></span>
-											</span>
-											<span class='natureBuyIcon noselect natureBuyIconMini' onmouseover="natureTooltip(event, 'convert', 'Poison', 'Ice')" onmouseout="tooltip('hide');" onclick="naturePurchase('convert', 'Poison', 'Ice')">
+												Convert Poison to Wind
+											</button>
+											<button class='natureBuyIcon noselect natureBuyIconMini' id='naturePoisonIceBtn' onclick="naturePurchase('convert', 'Poison', 'Ice')">
 												<span class='natureUpgradeCost' id='naturePoisonIceCost'></span>
-												<span class='natureSmallIcon icomoon icon-shuffle3'></span>
-												<span class='natureSmallIcon glyphicon glyphicon-certificate'></span>
-											</span>
+												Convert Poison to Ice
+											</button>
 										</div>
 										<span class='natureBackgroundIcon icomoon icon-flask'></span>
 									</div>
 									<div id='tabColWind' class='col-xs-4 tabColWind tabColNature noPad'>
-										<div class='natureTop'>
+										<button class='natureTop' id='natureInfoWind'>
 											<div class='natureTitle'>
-												<span id='infoSpanWind' class='infoSpanNature' onmouseover="natureTooltip(event, 'description', 'Wind')" onmouseout="tooltip('hide')"><span class='icomoon icon-info2'></span></span>
+												<span id='infoSpanWind' class='infoSpanNature'><span class='icomoon icon-info2'></span></span>
 													Wind
 											</div>
 											Tokens: <span id="tokenCountWind">0</span>
-										</div>
-										<span class='natureBuyIcon noselect' onmouseover="natureTooltip(event, 'upgrade', 'Wind')" onmouseout="tooltip('hide');" onclick="naturePurchase('upgrade', 'Wind')">
+										</button>
+										<button class='natureBuyIcon noselect' id='natureUpgradeWindBtn' onclick="naturePurchase('upgrade', 'Wind')">
 											<span class='natureUpgradeLevel' id='natureUpgradeWindLevel'></span>
 											<span class='natureUpgradeCost' id='natureUpgradeWindCost'></span>
 											<span class='natureBigIcon icomoon icon-plus'></span>
-										</span>
-										<span class='natureBuyIcon noselect' onmouseover="natureTooltip(event, 'stackTransfer', 'Wind')" onmouseout="tooltip('hide');" onclick="naturePurchase('stackTransfer', 'Wind')">
+										</button>
+										<button class='natureBuyIcon noselect' id='natureStackTransferWindBtn' onclick="naturePurchase('stackTransfer', 'Wind')">
 											<span class='natureUpgradeLevel' id='natureStackTransferWindLevel'></span>
 											<span class='natureUpgradeCost' id='natureStackTransferWindCost'></span>
 											<span class='natureBigIcon icomoon icon-rotate-left'></span>
-										</span>
-										<span id='uberWindContainer' class='natureBuyIcon natureUberContainer noselect' onmouseover="natureTooltip(event, 'uberEmpower', 'Wind')" onmouseout="tooltip('hide');" onclick="naturePurchase('uberEmpower', 'Wind')">
+										</button>
+										<button id='uberWindContainer' class='natureBuyIcon natureUberContainer noselect' id='uberWindBtn' onclick="naturePurchase('uberEmpower', 'Wind')">
 											<span class='natureUpgradeLevel natureUberName' id='uberWindName'></span>
 											<span class='natureUpgradeCost' id='natureUberEmpowerWindCost'></span>
 											<span class='natureBigIcon glyphicon glyphicon-king'></span>
-										</span>
+										</button>
 										<div class='transferButtons'>
-											<span class='natureBuyIcon noselect natureBuyIconMini' onmouseover="natureTooltip(event, 'convert', 'Wind', 'Poison')" onmouseout="tooltip('hide');" onclick="naturePurchase('convert', 'Wind', 'Poison')">
+											<button class='natureBuyIcon noselect natureBuyIconMini' id="natureWindPoisonBtn" onclick="naturePurchase('convert', 'Wind', 'Poison')">
 												<span class='natureUpgradeCost' id='natureWindPoisonCost'></span>
-												<span class='natureSmallIcon icomoon icon-shuffle3'></span>
-												<span class='natureSmallIcon icomoon icon-flask'></span>
-											</span>
-											<span class='natureBuyIcon noselect natureBuyIconMini' onmouseover="natureTooltip(event, 'convert', 'Wind', 'Ice')" onmouseout="tooltip('hide');" onclick="naturePurchase('convert', 'Wind', 'Ice')">
+												Convert Wind to Poison
+											</button>
+											<button class='natureBuyIcon noselect natureBuyIconMini' id='natureWindIceBtn' onclick="naturePurchase('convert', 'Wind', 'Ice')">
 												<span class='natureUpgradeCost' id='natureWindIceCost'></span>
-												<span class='natureSmallIcon icomoon icon-shuffle3'></span>
-												<span class='natureSmallIcon glyphicon glyphicon-certificate'></span>
-											</span>
+												Convert Wind to Ice
+											</button>
 										</div>
 										<span class='natureBackgroundIcon icomoon icon-air'></span>
 									</div>
 									<div id='tabColIce' class='col-xs-4 tabColIce tabColNature noPad'>
-										<div class='natureTop'>
+										<button class='natureTop' id='natureInfoIce'>
 											<div class='natureTitle'>
-												<span id='infoSpanIce' class='infoSpanNature' onmouseover="natureTooltip(event, 'description', 'Ice')" onmouseout="tooltip('hide')"></span>
+												<span id='infoSpanIce' class='infoSpanNature'></span>
 												Ice
 											</div>
 											Tokens: <span id="tokenCountIce">0</span>
-										</div>
-										<span class='natureBuyIcon noselect' onmouseover="natureTooltip(event, 'upgrade', 'Ice')" onmouseout="tooltip('hide');" onclick="naturePurchase('upgrade', 'Ice')">
+										</button>
+										<button class='natureBuyIcon noselect' id='natureUpgradeIceBtn' onclick="naturePurchase('upgrade', 'Ice')">
 											<span class='natureUpgradeLevel' id='natureUpgradeIceLevel'></span>
 											<span class='natureUpgradeCost' id='natureUpgradeIceCost'></span>
 											<span class='natureBigIcon icomoon icon-plus'></span>
-										</span>
-										<span class='natureBuyIcon noselect' onmouseover="natureTooltip(event, 'stackTransfer', 'Ice')" onmouseout="tooltip('hide');" onclick="naturePurchase('stackTransfer', 'Ice')">
+										</button>
+										<button class='natureBuyIcon noselect' id="natureStackTransferIceBtn" onclick="naturePurchase('stackTransfer', 'Ice')">
 											<span class='natureUpgradeLevel' id='natureStackTransferIceLevel'></span>
 											<span class='natureUpgradeCost' id='natureStackTransferIceCost'></span>
 											<span class='natureBigIcon icomoon icon-rotate-left'></span>
-										</span>
-										<span id='uberIceContainer' class='natureBuyIcon noselect natureUberContainer' onmouseover="natureTooltip(event, 'uberEmpower', 'Ice')" onmouseout="tooltip('hide');" onclick="naturePurchase('uberEmpower', 'Ice')">
+										</button>
+										<button id='uberIceContainer' class='natureBuyIcon noselect natureUberContainer' id="uberIceBtn" onclick="naturePurchase('uberEmpower', 'Ice')">
 											<span class='natureUpgradeLevel natureUberName' id='uberIceName'></span>
 											<span class='natureUpgradeCost' id='natureUberEmpowerIceCost'></span>
 											<span class='natureBigIcon glyphicon glyphicon-king'></span>
-										</span>
+										</button>
 										<div class="transferButtons">
-											<span class='natureBuyIcon noselect natureBuyIconMini' onmouseover="natureTooltip(event, 'convert', 'Ice', 'Poison')" onmouseout="tooltip('hide');" onclick="naturePurchase('convert', 'Ice', 'Poison')">
+											<button class='natureBuyIcon noselect natureBuyIconMini' id="natureIcePoisonBtn" onclick="naturePurchase('convert', 'Ice', 'Poison')">
 												<span class='natureUpgradeCost' id='natureIcePoisonCost'></span>
-												<span class='natureSmallIcon icomoon icon-shuffle3'></span>
-												<span class='natureSmallIcon icomoon icon-flask'></span>
-											</span>
-											<span class='natureBuyIcon noselect natureBuyIconMini' onmouseover="natureTooltip(event, 'convert', 'Ice', 'Wind')" onmouseout="tooltip('hide');" onclick="naturePurchase('convert', 'Ice', 'Wind')">
+												Convert Ice to Poison
+											</button>
+											<button class='natureBuyIcon noselect natureBuyIconMini' id='natureIceWindBtn'  onclick="naturePurchase('convert', 'Ice', 'Wind')">
 												<span class='natureUpgradeCost' id='natureIceWindCost'></span>
-												<span class='natureSmallIcon icomoon icon-shuffle3'></span>
-												<span class='natureSmallIcon icomoon icon-air'></span>
-											</span>
+												Convert Ice to Wind
+											</button>
 										</div>
 										<span class='natureBackgroundIcon icomoon icon-certificate'></span>
 									</div>
@@ -658,36 +663,38 @@
 									</div>
 									<div id='colStances' class="col-xs-3" style="padding-left: 5px;">
 										<div class="row noPad" style="padding-right: 15px;">
+											<form name="FormationInput">
 											<div id='form0Container' class="formFifth noPad">
-												<div class="formationBtn pointer formationStateDisabled" onclick="setFormation('0')" id="formation0" onmouseover="tooltip('No Formation', 'customText', event, 'Clear your formations, return to normal stats, and derp around the battlefield. (Hotkeys: X or 1)')" onmouseout="tooltip('hide')">
-													X
-												</div>
+												<input type="radio" name="formations" aria-label="No Formation" class="formationBtn pointer formationStateDisabled" onclick="setFormation('0')" id="formation0" value="0">
+													
+												</input>
 											</div>
 											<div id='form1Container' class="formFifth noPad">
-												<div class="formationBtn pointer formationStateDisabled" onclick="setFormation('1')" id="formation1" onmouseover="tooltip('Heap Formation', 'customText', event, 'Trimps gain 4x health but lose half of their attack and block. (Hotkeys: H or 2)')" onmouseout="tooltip('hide')">
-													H
-												</div>
+												<input type="radio" name="formations"  aria-label="Heap" class="formationBtn pointer formationStateDisabled" onclick="setFormation('1')" id="formation1" value="1">
+													
+												</input>
 											</div>
 											<div id='form2Container' class="formFifth noPad">
-												<div class="formationBtn pointer formationStateDisabled" onclick="setFormation('2')" id="formation2" onmouseover="tooltip('Dominance Formation', 'customText', event, 'Trimps gain 4x attack but lose half of their health and block. (Hotkeys: D or 3)')" onmouseout="tooltip('hide')">
-													D
-												</div>										
+												<input type="radio" name="formations" aria-label="Dominance" class="formationBtn pointer formationStateDisabled" onclick="setFormation('2')" id="formation2" value="2">
+													
+												</input>										
 											</div>
 											<div id='form3Container' class="formFifth noPad">
-												<div class="formationBtn pointer formationStateDisabled" onclick="setFormation('3')" id="formation3" onmouseover="tooltip('Barrier Formation', 'customText', event, 'Trimps gain 4x block and 50% block pierce reduction but lose half of their health and attack. (Hotkeys: B or 4)')" onmouseout="tooltip('hide')">
-													B
-												</div>											
+												<input type="radio" name="formations" aria-label="Barrier" class="formationBtn pointer formationStateDisabled" onclick="setFormation('3')" id="formation3" value="3">
+													
+												</dinputiv>											
 											</div>
 											<div id='form4Container' class="formFifth noPad">
-												<div class="formationBtn pointer formationStateDisabled" onclick="setFormation('4')" id="formation4" onmouseover="tooltip('Scryer Formation', null, event)" onmouseout="tooltip('hide')">
-													S
-												</div>											
+												<input type="radio" name="formations" aria-label="Scryer"class="formationBtn pointer formationStateDisabled" onclick="setFormation('4')" id="formation4" value="4">
+													
+												</input>											
 											</div>
 											<div id='form5Container' class="formSixth noPad">
-												<div class="formationBtn pointer formationStateDisabled" onclick="setFormation('5')" id="formation5" onmouseover="natureTooltip(event, 'formation')" onmouseout="tooltip('hide')">
-													N
-												</div>											
+												<input type="radio" name="formations" aria-label="Wind" class="formationBtn pointer formationStateDisabled" onclick="setFormation('5')" id="formation5" value="5">
+													
+												</input>											
 											</div>
+										</form>
 										</div>
 									</div>
 								</div>
@@ -699,8 +706,8 @@
 									<div class="col-xs-4 noPad pointer noselect bdHover" id="blockDiv" style="visibility: hidden" onclick="getBattleStatBd('block')">
 										<span id="goodGuyBlock">0</span> <span id='goodGuyBlockName'>BLK</span>
 									</div>
-									<div class="col-xs-2 pointer noselect" title="Activate MagnetoShriek" role="button" style="padding-left: 0" id="roboTrimpBtn" onclick="magnetoShriek()">
-										<span id="chainHolder" class="shriekStateCooldown" style='visibility: hidden' onmouseover="tooltip('MagnetoShriek', null, event)" onmouseout="tooltip('hide')"><span id="roboTrimpTurnsLeft"></span> <span class="icomoon icon-chain" style="color: white"></span></span>
+									<div class="col-xs-2 pointer noselect" style="padding-left: 0; display: none" id="roboTrimpBtn">
+										<button id="chainHolder" class="shriekStateCooldown" onclick="magnetoShriek()"><span id="roboTrimpTurnsLeft"></span> <span class="icomoon icon-chain" style="color: white"></span></span>
 									</div>
 								</div>
 								<div class="progress fightBar">
@@ -721,7 +728,7 @@
 								<div class="row">
 									<h4 style='font-size: 0px'>Enemy Battle Stats</h4>
 									<div class="col-xs-11">
-									<span class="battleStatsTitle"><span id="badGuyName"></span> <span id="corruptionBuff"></span><span id="voidBuff"></span><span id="badCanCrit" style="display: none" class="badge" onmouseover="tooltip('Crushing Blows', 'customText', event, 'Your current health is higher than your block, making you vulnerable to critical strikes from your enemies. Better fix that...')" onmouseout="tooltip('hide')"><span class="icomoon icon-hair-cross"></span></span><span id='badDebuffSpan'></span></span><br/>
+									<span class="battleStatsTitle"><span id="badGuyName"></span> <span id="corruptionBuff"></span><span id="voidBuff"></span><span id="badCanCrit" style="display: none" class="badge" onmouseover="tooltip('Crushing Blows', 'customText', event, 'Your current health is higher than your block, making you vulnerable to critical strikes from your enemies. Better fix that...')" ><span class="icomoon icon-hair-cross"></span></span><span id='badDebuffSpan'></span></span><br/>
 									<div class="guyRow" id="badGuyRow">
 									<div>
 										<span id="badGuyAttack" class="dmgColorWhite"></span> DMG <span id="badCrit"></span>
@@ -730,7 +737,7 @@
 									</div>
 									<div class="col-xs-1" style="font-size: 1.5em; padding: 0;">
 										<div id="lootBdContainer">
-											<span id="lootBdBtn" class="icomoon icon-gift2 pointer" onclick="getLootBd('Food/Wood/Metal')"></span>
+											<span id="lootBdBtn" aria-label="Loot Breakdown" class="icomoon icon-gift2 pointer" onclick="getLootBd('Food/Wood/Metal')"></span>
 											<div id="openTutorialContainer" style="display: none;">
 												<span id="openTutorialBtn" class="flashNo icomoon icon-star pointer tutorialStar" onclick="tutorial.popup()" style="color: gold;"></span>
 											</div>
@@ -753,57 +760,58 @@
 					</div>
 					<div class="row" id="gridRow">
 						<div class="col-xs-2" id="battleBtnsColumn">
-							<div id="battleSideTitle" onmouseover="getZoneStats(event)" onmouseout="tooltip('hide')">
+							<div id="battleSideTitle">
 									<h3><span id="worldName">Zone</span> <span id="worldNumber">1</span><br/><span id="mapBonus"></span></h3>
 							</div>
 							<div class="battleSideBtnContainer">
-								<span class="btn btn-primary fightBtn" id="fightBtn" onmouseover="tooltip('Fight',null,event)" onmouseout="tooltip('hide')" onclick="fightManual()">
+							<button class="btn btn-primary fightBtn" id="fightBtn" onclick="fightManual()">
 									Fight
-								</span>
+							</button>
 							</div>
 							<div class="battleSideBtnContainer">
-								<span class="btn btn-danger fightBtn" id="pauseFight" onmouseover="tooltip('AutoFight',null,event)" onmouseout="tooltip('hide')" onclick="pauseFight()" style="display: none">
+							<button class="btn btn-danger fightBtn" id="pauseFight" onclick="pauseFight()" style="display: none">
 									AutoFight Off
-								</span>
+							</button>
 							</div>
 							<div class="battleSideBtnContainer">
-								<div id="mapsBtn" class="btn btn-warning fightBtn" onmouseover="tooltip('Maps', null, event)" onmouseout="tooltip('hide')" style="display: none">
-									<div id='mapsBtnText' onclick="mapsClicked()">Maps</div><div role="button" title='Configure Map Settings. Press S after clicking.' onclick="tooltip('Configure Maps', null, 'update')">
-										<span class='glyphicon glyphicon-cog'></span></div>
-								</div>
+								<button id="mapsBtn" class="btn btn-warning fightBtn" style="display: none">
+									<div id='mapsBtnText' onclick="mapsClicked()">Maps</div>
+									<button aria-label='Configure Map Settings. Press S to view the popup.' onclick="tooltip('Configure Maps', null, 'update')">
+										<span class='glyphicon glyphicon-cog'>Configure Maps</span></button>
+									</button>
 							</div>
 							<div class="battleSideBtnContainer">
-								<span class="btn voidMessage fightBtn" id="voidMapsBtn" onclick="toggleVoidMaps()" style="display: none">
+								<button class="btn voidMessage fightBtn" id="voidMapsBtn" onclick="toggleVoidMaps()" style="display: none">
 									Void Maps
-								</span>
+								</button>
 							</div>
 							<div class="battleSideBtnContainer">
-								<span class="btn btn-info fightBtn" id="portalBtn" onmouseover="tooltip('Portal', null, event)" onmouseout="tooltip('hide')" onclick="portalClicked()" style="display: none">
+								<button class="btn btn-info fightBtn" id="portalBtn" onclick="portalClicked()" style="display: none">
 									Portal
-								</span>
+								</button>
 							</div>
 							<div class="battleSideBtnContainer">
-								<span class="btn btn-danger fightBtn" id="repeatBtn" onmouseover="tooltip('Repeat Map', null, event)" onmouseout="tooltip('hide')" onclick = "repeatClicked()" style="display: none">
+								<button class="btn btn-danger fightBtn" id="repeatBtn" onclick = "repeatClicked()" style="display: none">
 									Repeat Off
-								</span>
+								</button>
 							</div>
 							<div class="battleSideBtnContainer" style="display: none" id="heirloomBtnContainer">
-								<span id="heirloomsBtn" class="btn fightBtn heirloomsBtnColor" onclick="toggleHeirlooms()">Heirlooms</span>
+								<button id="heirloomsBtn" class="btn fightBtn heirloomsBtnColor" onclick="toggleHeirlooms()">Heirlooms</button>
 							</div>
 							<div class="battleSideBtnContainer" style="display: none" id="boneBtnContainer">
-								<span class="btn btn-default fightBtn" id="boneBtnMain" onclick="showBones()">
+								<button class="btn btn-default fightBtn" id="boneBtnMain" onclick="showBones()">
 									<span id="boneBtnText">Bone Trader</span>
-								</span>
+								</button>
 							</div>							
 							<div class="battleSideBtnContainer" style="display: none" id="finishDailyBtnContainer">
-								<span class="btn btn-success fightBtn" id="finishDailyBtn" onclick="tooltip('Finish Daily', null, 'update')">
+								<button class="btn btn-success fightBtn" id="finishDailyBtn" onclick="tooltip('Finish Daily', null, 'update')">
 									Finish Daily
-								</span>
+								</button>
 							</div>
 							<div class="battleSideBtnContainer" style="display: none" id="exitSpireBtnContainer">
-								<span class="btn btn-danger fightBtn" id="exitSpireBtn" onclick="tooltip('Exit Spire', null, 'update')">
+								<button class="btn btn-danger fightBtn" id="exitSpireBtn" onclick="tooltip('Exit Spire', null, 'update')">
 									Exit Spire
-								</span>
+								</button>
 							</div>
 
 						</div>
@@ -815,52 +823,52 @@
 									<span id="openTutorialBtn2" class="flashNo icomoon icon-star pointer tutorialStar" onclick="tutorial.popup()" style="color: gold;"></span>
 								</div>
 								<div id='advMapsControlBtns'>
-									<span id='advMapsHideBtn' role="button" title="Show/Hide map settings" class='icomoon icon-minus-circle pointer' onclick='hideAdvMaps()' onmouseover="tooltip('Show/Hide Map Config', 'advMaps', event)" onmouseout="tooltip('hide')">&nbsp;</span>
-									<span id='advMapsPreset1' role="button" title="Load Preset 1" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(1)' onmouseover="tooltip('Map Preset', 'advMaps', event)" onmouseout="tooltip('hide')">1</span>
-									<span id='advMapsPreset2' role="button" title="Load Preset 2" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(2)' onmouseover="tooltip('Map Preset', 'advMaps', event)" onmouseout="tooltip('hide')">2</span>
-									<span id='advMapsPreset3' role="button" title="Load Preset 3" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(3)' onmouseover="tooltip('Map Preset', 'advMaps', event)" onmouseout="tooltip('hide')">3</span>
-									<span id='advMapsPreset4' class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(4)' onmouseover="tooltip('Map Preset', 'advMaps', event)" onmouseout="tooltip('hide')">4</span>
-									<span id='advMapsPreset5' class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(5)' onmouseover="tooltip('Map Preset', 'advMaps', event)" onmouseout="tooltip('hide')">5</span>
-									<span id='advMapsSaveBtn' role="button" title="Save Settings to Selected Preset" class='icomoon icon-save pointer' onclick='saveAdvMaps()' onmouseover="tooltip('Save Map Settings', 'advMaps', event)" onmouseout="tooltip('hide')">&nbsp;</span>	
-									<span id='advMapsResetBtn' role="button" title="Reset The Selected Preset" class='icomoon icon-refresh pointer' onclick='resetAdvMaps(true)' onmouseover="tooltip('Reset Map Settings', 'advMaps', event)" onmouseout="tooltip('hide')">&nbsp;</span>											
-									<span id='advMapsRecycleBtn' role="button" title="Recycle All Maps" class="icomoon icon-trash-o pointer iconStateBad" onmouseover="tooltip('Recycle All', null, event)" onmouseout="tooltip('hide')" onclick="recycleBelow(false)">&nbsp;</span>
+									<button id='advMapsHideBtn'  aria-label="Show/Hide map settings" class='icomoon icon-minus-circle pointer' onclick='hideAdvMaps()' >&nbsp;</button>
+									<button id='advMapsPreset1'  aria-label="Load Preset 1" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(1)' >1</button>
+									<button id='advMapsPreset2'  aria-label="Load Preset 2" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(2)' >2</button>
+									<button id='advMapsPreset3'  aria-label="Load Preset 3" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(3)' >3</button>
+									<button id='advMapsPreset4'  aria-label="Load Preset 4" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(4)' >4</button>
+									<button id='advMapsPreset5'  aria-label="Load Preset 5" class='pointer mapPreset presetSelectionOff' onclick='selectAdvMapsPreset(5)' >5</button>
+									<button id='advMapsSaveBtn'  aria-label="Save Settings to Selected Preset" class='icomoon icon-save pointer' onclick='saveAdvMaps()' >&nbsp;</button>	
+									<button id='advMapsResetBtn'  aria-label="Reset The Selected Preset" class='icomoon icon-refresh pointer' onclick='resetAdvMaps(true)' >&nbsp;</button>											
+									<button id='advMapsRecycleBtn'  aria-label="Recycle All Maps" class="icomoon icon-trash-o pointer iconStateBad"  onclick="recycleBelow(false)">&nbsp;</button>
 								</div>
 								<div id="mapLevelContainer" class="col-xs-4">
-									Level <span role="button" title="Reduce map level by 1" class="pointer noselect incrementBtn" onclick="incrementMapLevel(-1)">&nbsp;<span class="glyphicon glyphicon-download"></span></span><input onkeyup="updateMapCost()" type="number" id="mapLevelInput" onfocusout="checkMapLevelInput(this)"><span role="button" title="Increase map level by 1" class="pointer noselect incrementBtn" onclick="incrementMapLevel(1)">&nbsp;<span class="glyphicon glyphicon-upload"></span></span>
+									Level <input onkeyup="updateMapCost()" type="number" id="mapLevelInput" onfocusout="checkMapLevelInput(this)">
 								</div>
 								<div id="mapCostContainer" class="col-xs-4 lowPad">
-									<h4 title="Map Cost"><span id="mapCostFragmentCost"></span><span id="mapCostFragmentText"> Fragments</span></h4>
+									<h4 aria-description="Map Cost"><span id="mapCostFragmentCost"></span><span id="mapCostFragmentText"> Fragments</span></h4>
 								</div>
-								<div id="mapCreateBtn" role="button" onclick='buyMap()' class="workBtn primaryColor pointer noselect col-xs-4">
+								<button id="mapCreateBtn"  onclick='buyMap()' class="workBtn primaryColor pointer noselect col-xs-4">
 									Create
-								</div>
+								</button>
 							</div>
 							<div id="advMapsRow" class="row">
 								<div id="advLootContainer" class="col-xs-3 mapConfigContainer lowPad">
-									<div class="advMapsTitle" onmouseover="tooltip('Loot', 'advMaps', event)" onmouseout="tooltip('hide')">
+									<div class="advMapsTitle">
 										Loot
 									</div>
 									<br/>
-									<input title="Loot setting slider" value="0" id="lootAdvMapsRange" class="mapSelector mapInput" type="range" min="0" max="9" oninput="updateMapNumbers('loot')" onchange="updateMapNumbers('loot')">
+									<input aria-label="Loot setting slider" value="0" id="lootAdvMapsRange" class="mapSelector mapInput" type="range" min="0" max="9" oninput="updateMapNumbers('loot')" onchange="updateMapNumbers('loot')">
 									<div id="lootAdvMapsText"></div>
 								</div>
 								<div id="advSizeContainer" class="col-xs-3 mapConfigContainer lowPad">
-									<div class="advMapsTitle" onmouseover="tooltip('Size', 'advMaps', event)" onmouseout="tooltip('hide')">
+									<div class="advMapsTitle">
 										Size
 									</div>
 									<br/>
-									<input value="0" title="Size setting slider" id="sizeAdvMapsRange" class="mapSelector mapInput" type="range" min="0" max="9" oninput="updateMapNumbers('size')" onchange="updateMapNumbers('size')">
+									<input value="0" aria-label="Size setting slider" id="sizeAdvMapsRange" class="mapSelector mapInput" type="range" min="0" max="9" oninput="updateMapNumbers('size')" onchange="updateMapNumbers('size')">
 									<div id="sizeAdvMapsText"></div>
 								</div>
 								<div id="advDifficultyContainer" class="col-xs-3 mapConfigContainer lowPad">
-									<div class="advMapsTitle" onmouseover="tooltip('Difficulty', 'advMaps', event)" onmouseout="tooltip('hide')">
+									<div class="advMapsTitle">
 										Difficulty
 									</div>
 									<br/>
-									<input value="0" title="Difficulty setting slider" id="difficultyAdvMapsRange" class="mapSelector mapInput" type="range" min="0" max="9" oninput="updateMapNumbers('difficulty')" onchange="updateMapNumbers('difficulty')">
+									<input value="0" aria-label="Difficulty setting slider" id="difficultyAdvMapsRange" class="mapSelector mapInput" type="range" min="0" max="9" oninput="updateMapNumbers('difficulty')" onchange="updateMapNumbers('difficulty')">
 									<div id="difficultyAdvMapsText"></div>
 								</div>
-								<div id="advBiomeContainer" class="col-xs-3 mapConfigContainer lowPad" onmouseover="tooltip('Biome', 'advMaps', event)" onmouseout="tooltip('hide')">
+								<div id="advBiomeContainer" class="col-xs-3 mapConfigContainer lowPad">
 									<div class="advMapsTitle">
 										Biome
 									</div>
@@ -877,7 +885,7 @@
 							<div id="advMapsRow2" class="row">
 								<div class="col-xs-2 mapConfigContainer lowPad"></div>
 								<div class="col-xs-3 mapConfigContainer lowPad">
-									<div class="advMapsTitle" onmouseover="tooltip('Special Modifier', 'advMaps', event)" onmouseout="tooltip('hide')">
+									<div class="advMapsTitle">
 										Special Modifier
 									</div>
 									<br/>
@@ -892,11 +900,11 @@
 										<span class="icomoon icon-lock3"></span>
 									</div>
 									<div id="advPerfectUnlocked" style="display: none">
-										<div class="advMapsTitle" onmouseover="tooltip('Perfect Sliders', 'advMaps', event)" onmouseout="tooltip('hide')">
+										<div class="advMapsTitle">
 											Perfect Sliders
 										</div>
 										<br/>
-										<span id="advPerfectCheckbox" class="icomoon icon-checkbox-unchecked niceCheckbox" data-checked="false" onclick="swapNiceCheckbox(this); updateMapNumbers()"></span>
+										<span id="advPerfectCheckbox" role='checkbox' tabindex=0 class="icomoon icon-checkbox-unchecked niceCheckbox" aria-checked="false" data-checked="false" onclick="swapNiceCheckbox(this); updateMapNumbers()"></span>
 									</div>
 								</div>
 								<div class="col-xs-3 mapConfigContainer lowPad">
@@ -907,7 +915,7 @@
 										<span class="icomoon icon-lock3"></span>
 									</div>
 									<div id="advExtraLevelUnlocked" style="display: none">
-										<div class="advMapsTitle" onmouseover="tooltip('Extra Zones', 'advMaps', event)" onmouseout="tooltip('hide')">
+										<div class="advMapsTitle">
 											Extra Zones
 										</div>
 										<br/>
@@ -922,7 +930,7 @@
 							<div id="selectedMapContainer" class="row">
 								<div id="selectedMapCol" class="col-xs-3 lowPad">
 									<div id="selectedMapName"></div><br/>
-									<div id="mapCreditsLeft" title="Earn 1 Credit for each zone you clear while on this challenge"></div>
+									<div id="mapCreditsLeft" aria-label="Earn 1 Credit for each zone you clear while on this challenge"></div>
 								</div>
 
 								<div id="mapStatsCol3" class="col-xs-5 lowPad">
@@ -937,12 +945,12 @@
 									</div>
 								</div>
 								<div id="selectMapBtns">
-									<span id="selectMapBtn" role="button" class="workBtn pointer noselect infoColor selectMapBtn" style="visibility: hidden" onclick="runMap()">
+									<button id="selectMapBtn" class="workBtn pointer noselect infoColor selectMapBtn" style="visibility: hidden" onclick="runMap()">
 										Run Map
-									</span>
-									<span id="recycleMapBtn" role="button" class="workBtn pointer noselect dangerColor selectMapBtn" style="visibility: hidden" onclick="recycleMap()">
+									</button>
+									<button id="recycleMapBtn" class="workBtn pointer noselect dangerColor selectMapBtn" style="visibility: hidden" onclick="recycleMap()">
 										Recycle Map
-									</span>
+									</button>
 								</div>
 								</div>
 								<div id="mapStatsCol1" class="col-xs-2 mapStatsCol">
@@ -956,10 +964,10 @@
 									<div class="mapStatsValue" id="mapStatsLoot"></div>
 								</div>	
 							</div>
-							<div id="mapsHere" class="mapSize1 niceScroll">
-							</div>
-							<div id="voidMapsHere" class="niceScroll">
-							</div>
+							<ul id="mapsHere" class="mapSize1 niceScroll" aria-label="Owned Maps">
+							</ul>
+							<ul id="voidMapsHere" class="niceScroll" aria-label="Void Maps">
+							</ul>
 							</div>
 							<div id="mapGrid" class="gridShrunk" style="display: none;"></div>
 							<div id="extraGridInfo" style="display: none;">
@@ -973,27 +981,27 @@
 						</div>
 						<div id="extraMapBtns" class="col-xs-off">
 							<div class="battleSideBtnContainer">
-								<span class="btn settingBtn1 fightBtn" id="togglemapLoot2" onmouseout="tooltip('hide')" onclick="toggleSetting('mapLoot')">
+								<span class="btn settingBtn1 fightBtn" id="togglemapLoot2"  onclick="toggleSetting('mapLoot')">
 								</span>
 							</div>									
 							<div class="battleSideBtnContainer">
-								<span class="btn settingBtn1 fightBtn" id="togglerepeatUntil" onmouseout="tooltip('hide')" onclick="toggleSetting('repeatUntil')">
+								<span class="btn settingBtn1 fightBtn" id="togglerepeatUntil" onclick="toggleSetting('repeatUntil')">
 								</span>
 							</div>								
 							<div class="battleSideBtnContainer">
-								<span class="btn settingBtn1 fightBtn" id="toggleexitTo" onmouseout="tooltip('hide')" onclick="toggleSetting('exitTo')">
+								<span class="btn settingBtn1 fightBtn" id="toggleexitTo" onclick="toggleSetting('exitTo')">
 								</span>
 							</div>
 							<div class="battleSideBtnContainer">
-								<span class="btn settingBtn1 fightBtn" id="togglemapAtZone2" onmouseout="tooltip('hide')" onclick="toggleSetting('mapAtZone')">
+								<span class="btn settingBtn1 fightBtn" id="togglemapAtZone2" onclick="toggleSetting('mapAtZone')">
 								</span>
 							</div>							
 							<div class="battleSideBtnContainer" style="display: none" id="repeatVoidsContainer">
-								<span class="btn settingBtn1 fightBtn" id="togglerepeatVoids" onmouseout="tooltip('hide')" onclick="toggleSetting('repeatVoids')">
+								<span class="btn settingBtn1 fightBtn" id="togglerepeatVoids" onclick="toggleSetting('repeatVoids')">
 								</span>
 							</div>
 							<div class="battleSideBtnContainer" style="display: none" id="climbBwContainer">
-								<span class="btn settingBtn1 fightBtn" id="toggleclimbBw2" onmouseout="tooltip('hide')" onclick="toggleSetting('climbBw')">
+								<span class="btn settingBtn1 fightBtn" id="toggleclimbBw2" onclick="toggleSetting('climbBw')">
 								</span>
 							</div>					
 						</div>
@@ -1005,7 +1013,7 @@
 	</div>
 
 	<div id="portalWrapper" style="display: none" class="portalMk0">
-		<div role="button" id='swapPortalUniverseBtn' onmouseover="tooltip('Change Universe', null, event)" onmouseout="tooltip('hide')" onclick="swapPortalUniverse()">Change Universe</div>
+		<button id='swapPortalUniverseBtn'  onclick="swapPortalUniverse()">Change Universe</button>
 		<div id='titleRow'>
 			<div id='titleCol1' class='titleCol'>
 				<div>
@@ -1027,57 +1035,57 @@
 			<div class="challengeTitle">Perks</div>
 			<div id="portalStory"></div>
 			<div id="portalPresets" class="numTabs">
-				<ul class="nav nav-tabs nav-justified" id="portalPresetsTabs">
-						<li role="presentation" class="tabNotSelected" id="presetTab1" onclick="presetTab(1, true)" onmouseover="tooltip('Perk Preset', null, event, 1)" onmouseout="tooltip('hide')">
+				<ul class="nav nav-tabs nav-justified" id="portalPresetsTabs" aria-label="Presets and Import/Export">
+						<li class="tabNotSelected" id="presetTab1" onclick="presetTab(1, true)">
 							<a id="presetTab1Text">Preset 1</a>
 						</li>
-						<li role="presentation" class="tabNotSelected" id="presetTab2" onclick="presetTab(2, true)" onmouseover="tooltip('Perk Preset', null, event, 2)" onmouseout="tooltip('hide')">
+						<li class="tabNotSelected" id="presetTab2" onclick="presetTab(2, true)">
 							<a id="presetTab2Text">Preset 2</a>
 						</li>
-						<li role="presentation" class="tabNotSelected" id="presetTab3" onclick="presetTab(3, true)" onmouseover="tooltip('Perk Preset', null, event, 3)" onmouseout="tooltip('hide')">
+						<li class="tabNotSelected" id="presetTab3" onclick="presetTab(3, true)">
 							<a id="presetTab3Text">Preset 3</a>
 						</li>
-						<li role="presentation" class="tabNotEnabled" id="presetTabSave" onclick="savePerkPreset()" onmouseover="tooltip('Perk Preset', null, event, 'Save')" onmouseout="tooltip('hide')">
+						<li class="tabNotEnabled" id="presetTabSave" onclick="savePerkPreset()">
 							<a>Save</a>
 						</li>
-						<li role="presentation" class="tabNotEnabled" id="presetTabLoad" onclick="loadPerkPreset()" onmouseover="tooltip('Perk Preset', null, event, 'Load')" onmouseout="tooltip('hide')">							
+						<li class="tabNotEnabled" id="presetTabLoad" onclick="loadPerkPreset()">							
 							<a>Load</a>
 						</li>
-						<li role="presentation" class="tabNotEnabled" id="presetTabRename" onclick="renamePerkPreset(true)" onmouseover="tooltip('Perk Preset', null, event, 'Rename')" onmouseout="tooltip('hide')">
+						<li class="tabNotEnabled" id="presetTabRename" onclick="renamePerkPreset(true)">
 							<a>Rename</a>
 						</li>
-						<li role="presentation" class="tabNotEnabled" id="presetTabExport" onclick="tooltip('Export Perks', null, 'update')" onmouseover="tooltip('Perk Preset', null, event, 'Export')" onmouseout="tooltip('hide')">
+						<li class="tabNotEnabled" id="presetTabExport" onclick="tooltip('Export Perks', null, 'update')">
 							<a>Export</a>
 						</li>
-						<li role="presentation" class="tabNotEnabled" id="presetTabImport" onclick="tooltip('Import Perks', null, 'update')" onmouseover="tooltip('Perk Preset', null, event, 'Import')" onmouseout="tooltip('hide')">
+						<li class="tabNotEnabled" id="presetTabImport" onclick="tooltip('Import Perks', null, 'update')">
 							<a>Import</a>
 						</li>
 				</ul>
 			</div>
 				<div id="pnumTabs" class="numTabs">
-					<ul class="nav nav-tabs nav-justified" id="portalTabs">
-						<li role="presentation" class="tabNotSelected" id="ptab1" onclick="numTab(1, true)">
+					<ul class="nav nav-tabs nav-justified" id="portalTabs" aria-label="Buy Amount">
+						<li class="tabNotSelected" id="ptab1" onclick="numTab(1, true)">
 							<a id="ptab1Text">+1</a>
 						</li>
-						<li role="presentation"  class="tabNotSelected" id="ptab2" onclick="numTab(2, true)">
+						<li  class="tabNotSelected" id="ptab2" onclick="numTab(2, true)">
 							<a id="ptab2Text">+10</a>
 						</li>
-						<li role="presentation"  class="tabNotSelected" id="ptab3" onclick="numTab(3, true)">
+						<li  class="tabNotSelected" id="ptab3" onclick="numTab(3, true)">
 							<a id="ptab3Text">+25</a>
 						</li>
-						<li role="presentation"  class="tabNotSelected" id="ptab4" onclick="numTab(4, true)">
+						<li  class="tabNotSelected" id="ptab4" onclick="numTab(4, true)">
 							<a id="ptab4Text">+100</a>
 						</li>
-						<li role="presentation"  class="tabNotSelected" id="ptab5" onclick="tooltip('Custom', null, 'update', true)">
+						<li  class="tabNotSelected" id="ptab5" onclick="tooltip('Custom', null, 'update', true)">
 							<a id="ptab5Text">Custom</a>
 						</li>
-						<li role="presentation" class="tabNotSelected" id="ptab6" onclick="numTab(6, true)" onmouseover="tooltip('Buy Max', 'customText', event, 'Switching to this option will spend the majority of your Helium with each purchase. <b>Click twice to customize.</b>')" onmouseout="tooltip('hide')">
+						<li class="tabNotSelected" id="ptab6" onclick="numTab(6, true)" >
 							<a id="ptab6Text">Max</a>
 						</li>
-						<li role="presentation" class="tabNotSelected pointer" id="ptabInfo" onclick="toggleSetting('detailedPerks', null, true)">
+						<li class="tabNotSelected pointer" id="ptabInfo" onclick="toggleSetting('detailedPerks', null, true)">
 							<a id="ptabInfoText">More Info</a>
 						</li>
-						<li role="presentation" id="ptabRemove" style="display: none" onclick="toggleRemovePerks()">
+						<li id="ptabRemove" style="display: none" onclick="toggleRemovePerks()">
 							<a id="ptabRemoveText">Remove</a>
 						</li>
 					</ul>
@@ -1086,10 +1094,10 @@
 			</div>
 			<div id="challengeCol" class="col-xs-5">
 				<div id="viewChallenge" style="display: none">
-					<div style='text-align: center'><span class="thing thingColorSquared pointer" style='width: 50%; display: inline-block;'  onmouseover="tooltip('Challenge2', null, event, true)" onmouseout="tooltip('hide')" id='challengeSquaredViewBtn'>Challenge<sup><span id='challengeSquaredName'>2</span></sup> - <span id='challengeSquaredBonusAmtView'>0</span>% bonus</span></div>
+					<div style='text-align: center'><span class="thing thingColorSquared pointer" style='width: 50%; display: inline-block;'   id='challengeSquaredViewBtn'>Challenge<sup><span id='challengeSquaredName'>2</span></sup> - <span id='challengeSquaredBonusAmtView'>0</span>% bonus</span></div>
 					<span id="viewChallengeText">You do not currently have an active challenge.</span>
 				<br/><br/>
-				<div class="btn btn-warning inPortalBtn" style="display: none" id="cancelChallengeBtn" onclick="confirmAbandonChallenge()">Abandon Challenge</div>
+				<button class="btn btn-warning inPortalBtn" style="display: none" id="cancelChallengeBtn" onclick="confirmAbandonChallenge()">Abandon Challenge</button>
 				<span id="extraChallengeStuff"></span>
 				</div>
 				<div id="challenges"  style="display: none">
@@ -1097,10 +1105,10 @@
 						<div class="challengeTitle">Challenges</div>
 					</div>
 					<div id='challengeTitleSquared' style='display: none'>
-						<div class="challengeTitle" style='display: inline-block; width: 50%; padding: 0; margin: 0;'>Challenges</div><div style='display: inline-block; width: 50%; padding: 0; margin: 0;'><span id='inPortalC2Button' class="thing thingColorSquared pointer" style='width: 75%; display: inline-block;' onclick="toggleChallengeSquared()"  onmouseover="tooltip('Challenge2', null, event)" onmouseout="tooltip('hide')">Challenge<sup><span id='inPortalC2Name'>2</span></sup> - <span id='challengeSquaredBonusAmt'>0</span>% bonus</span></div>
+						<div class="challengeTitle" style='display: inline-block; width: 50%; padding: 0; margin: 0;'>Challenges</div><div style='display: inline-block; width: 50%; padding: 0; margin: 0;'><button id='inPortalC2Button' class="thing thingColorSquared pointer" style='width: 75%; display: inline-block;' onclick="toggleChallengeSquared()"  >Swap to/from Challenge<sup><span id='inPortalC2Name'>2</span></sup> - <span id='challengeSquaredBonusAmt'>0</span>% bonus</button></div>
 					</div>
 					
-					<div id="challengeDescription">
+					<div id="challengeDescription" aria-live="polite">
 						<span id="challengeDescriptionPre">You can also choose to activate a challenge before using your portal. Completing a challenge will earn you a permanent reward. You can abandon or view an active challenge at any time by clicking the "View Perks" button.</span>
 						<span id="flagMustRestart" style="display: none;"><b>If you abandon this challenge, the portal will become unstable and the world will restart (you'll keep permanent bonuses like helium)</b></span>
 
@@ -1108,25 +1116,25 @@
 							
 						</div>
 					</div>
-					<div id="challengesHere">
+					<ul id="challengesHere" aria-label="Challenges">
 					
-					</div>
+					</ul>
 				</div>
 			</div>
 		</div>
 		<div id="portalBtnContainer">
-			<div class="btn btn-primary inPortalBtn" id="activatePortalBtn" onclick="activateClicked()">Activate Portal</div>
-			<div class="btn btn-danger inPortalBtn" id="cancelPortalBtn" onclick="cancelTooltip(); cancelPortal()">Cancel</div>
-			<div class="btn btn-warning inPortalBtn" style="display: none" id="respecPortalBtn" onclick="respecPerks()" onmouseover="tooltip('Respec', null, event)" onmouseout="tooltip('hide')"></div>
-			<div class="btn btn-success inPortalBtn" style='display: none' id="swapToCurrentChallengeBtn" onclick="swapToCurrentChallenge()" onmouseover="tooltip('View Current Challenge', 'customText', event, 'Swap the Challenge Selection pane to instead display your current challenge, or vice versa')" onmouseout="tooltip('hide')">View Current Challenge</div>
-			<div class="btn btn-warning inPortalBtn" style="display: none" id="clearPerksBtn" onclick="clearPerks()">Clear All Perks</div>
-			<div class="btn inPortalBtn autoColor darkBorder" onmouseover="tooltip('Respec Mutators', null, event)" onmouseout="tooltip('hide')" onclick="u2Mutations.toggleRespec()" style="display: none" id="respecMutatorsBtn"></div>
+			<button class="btn btn-primary inPortalBtn" id="activatePortalBtn" onclick="activateClicked()">Activate Portal</button>
+			<button class="btn btn-danger inPortalBtn" id="cancelPortalBtn" onclick="cancelTooltip(); cancelPortal()">Cancel</button>
+			<button class="btn btn-warning inPortalBtn" style="display: none" id="respecPortalBtn" onclick="respecPerks()" ></button>
+			<button class="btn btn-success inPortalBtn" style='display: none' id="swapToCurrentChallengeBtn" onclick="swapToCurrentChallenge()" >View Current Challenge</button>
+			<button class="btn btn-warning inPortalBtn" style="display: none" id="clearPerksBtn" onclick="clearPerks()">Clear All Perks</button>
+			<button class="btn inPortalBtn autoColor darkBorder"  onclick="u2Mutations.toggleRespec()" style="display: none" id="respecMutatorsBtn"></button>
 		</div>
 	</div>
 	<div id="achievementWrapper" style="display: none">
 		<div id="achievementMainButtons">
-			<span id="achievementHelp" style='display: none' onclick="toggleAchievementHelp()" class="icomoon icon-question-circle"></span>
-			<span id="achievementMainClose" role='button' title='Close Achievement Screen' onclick="toggleAchievementWindow()" class="icomoon icon-close">Close</span>
+			<button id="achievementHelp" aria-label="Help?" style='display: none' onclick="toggleAchievementHelp()" class="icomoon icon-question-circle"></button>
+			<button id="achievementMainClose" aria-label='Close Achievement Screen' onclick="toggleAchievementWindow()" class="icomoon icon-close">Close</button>
 		</div>
 		<div class="row" id="achievementTopRow">
 			<div class="col-xs-6">
@@ -1200,7 +1208,7 @@
 			<div class='heirloomChanceBtnContainer'><span id="heirloomChanceLeft" onclick="changeHeirloomRarityRange(-1)" class='icomoon icon-arrow-left'></span></div><div id="heirloomRarityMain"></div><div class='heirloomChanceBtnContainer'><span id="heirloomChanceRight" class='icomoon icon-arrow-right' onclick="changeHeirloomRarityRange(1)"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-xs-6" id="heirloomSelections">
 				<div id="equippedHeirlooms">
 					<div class="row">
 						<div id='ShieldEquippedContainer' class="col-xs-6 heirloomEquippedContainer">
@@ -1228,17 +1236,17 @@
 					Carried <span id="carriedHeirloomsText"></span>
 					<div id="carriedHeirloomsHere"></div>
 					<div id="carriedHeirloomsBtnGroup" class="heirloomBtnGroup" style="visibility: hidden">
-						<div role="button" id="equipHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="equipHeirloom()">Equip</div>
-						<div role="button" id="stopCarryHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="stopCarryHeirloom()">Stop Carrying</div>
+						<button  id="equipHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="equipHeirloom()">Equip</button>
+						<button  id="stopCarryHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="stopCarryHeirloom()">Stop Carrying</button>
 					</div>
 				</div>
 				<div id="extraHeirlooms">
-					<h4>Temporary <span id="extraHeirloomsText"></span> <div role="button" id="recycleAllHeirloomsBtn" onclick="recycleAllHeirloomsClicked()" class="heirloomBtnActive heirBtn noselect">Recycle All</div>&nbsp;<div id="sortHeirloomsBtn" onclick="sortHeirlooms()" class="heirloomBtnActive heirBtn noselect">Sort</div></h4>
+					<h4>Temporary <span id="extraHeirloomsText"></span> <button  id="recycleAllHeirloomsBtn" onclick="recycleAllHeirloomsClicked()" class="heirloomBtnActive heirBtn noselect">Recycle All</button>&nbsp;<button id="sortHeirloomsBtn" onclick="sortHeirlooms()" class="heirloomBtnActive heirBtn noselect">Sort</button></h4>
 					<div id="extraHeirloomsHere"></div>
 					<div id="extraHeirloomsBtnGroup" class="heirloomBtnGroup" style="visibility: hidden">
-						<div role="button" id="equipHeirloomBtn2" class="noselect heirloomBtnActive heirBtn"  onclick="equipHeirloom()">Equip</div>
-						<div role="button" id="carryHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="carryHeirloom()">Carry</div>
-						<div role="button" id="recycleHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="recycleHeirloom()">Recycle</div>
+						<button  id="equipHeirloomBtn2" class="noselect heirloomBtnActive heirBtn"  onclick="equipHeirloom()">Equip</button>
+						<button  id="carryHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="carryHeirloom()">Carry</button>
+						<button  id="recycleHeirloomBtn" class="noselect heirloomBtnActive heirBtn"  onclick="recycleHeirloom()">Recycle</button>
 					</div>
 				</div>
 			</div>
@@ -1250,13 +1258,13 @@
 						<div class="col-xs-6" id="modReplaceBox">
 							<div id="modCantReplace" style="display: none"></div>
 							<select id="modReplaceSelect"></select><br/>
-							<div role="button" id="modReplaceBtn" class="heirloomBtnActive heirBtn noselect" onclick="replaceMod()">Replace</div>
+							<button  id="modReplaceBtn" class="heirloomBtnActive heirBtn noselect" onclick="replaceMod()">Replace</button>
 						</div>
 						<div class="col-xs-6" id="modUpgradeBox">
 							<div role="h5" id="modUpgradeCost"></div>
-							<div role="button" id="modUpgradeBtn" class="heirloomBtnActive heirBtn noselect modUpgradeBtn" onclick="upgradeMod()">x1<br/>&nbsp;</div>
-							<div role="button" id="modUpgradeBtn10" class="heirloomBtnActive heirBtn noselect modUpgradeBtn" onclick="upgradeMod(false, 10)">x10<br/>&nbsp;</div>
-							<div role="button" id="modUpgradeBtn100" class="heirloomBtnActive heirBtn noselect modUpgradeBtn" onclick="upgradeMod(false, 100)">x100<br/>&nbsp;</div>
+							<button  id="modUpgradeBtn" class="heirloomBtnActive heirBtn noselect modUpgradeBtn" onclick="upgradeMod()">x1<br/>&nbsp;</button>
+							<button  id="modUpgradeBtn10" class="heirloomBtnActive heirBtn noselect modUpgradeBtn" onclick="upgradeMod(false, 10)">x10<br/>&nbsp;</button>
+							<button  id="modUpgradeBtn100" class="heirloomBtnActive heirBtn noselect modUpgradeBtn" onclick="upgradeMod(false, 100)">x100<br/>&nbsp;</button>
 						</div>
 					</div>			
 				</div>
@@ -1265,8 +1273,8 @@
 	</div>
 	<div id="achievementPopup" style="display: none">
 		<span class="achievementBtns">
-			<span class="achievementBtnGo icomoon icon-newspaper-o" onclick="toggleAchievementWindow()"></span>
-			<span class="achievementBtnClose icomoon icon-close" onclick="closeAchievementPopup()"></span>	
+			<button class="achievementBtnGo icomoon icon-newspaper-o" aria-label="View Achievements" onclick="toggleAchievementWindow()"></button>
+			<button class="achievementBtnClose icomoon icon-close" aria-label="Close" onclick="closeAchievementPopup()"></button>	
 		</span>
 		<div class="row">
 			<div id="achievementPopupIconContainer" class="col-xs-3 lowPad">
@@ -1282,8 +1290,8 @@
 		<div id="heirloomsPopupBtns">
 			You Found an Heirloom!
 
-			<span class="heirloomPopupBtn icomoon icon-close" onclick="closeHeirPopup()"></span>
-			<span class="heirloomPopupBtn icomoon icon-archive" onclick="toggleHeirlooms(); closeHeirPopup();"></span>
+			<button class="heirloomPopupBtn icomoon icon-close" aria-label="Close" onclick="closeHeirPopup()"></button>
+			<button class="heirloomPopupBtn icomoon icon-archive" aria-label="View Heirlooms" onclick="toggleHeirlooms(); closeHeirPopup();"></button>
 		</div>
 		<div id="heirloomsPopupHere">
 		
@@ -1310,7 +1318,7 @@
 			&nbsp;
 		</div>
 		<div id="tutorialInner">
-			<hr title="Tutorial"/>
+			<hr aria-label="Tutorial"/>
 			<div id="tutorialTitle" class="noselect"><span id='tutorialSizeBtn' onclick="tutorial.toggleSize()" class='icomoon icon-expand'></span><span id="tutorialCloseBtn" onclick="tutorial.closeWindow()" class='icmoon icon-close'></span><span class="pointer" onclick='tutorial.back()'><span id="tutorialBackBtn" class='icomoon icon-arrow-left'></span><span class='icomoon icon-star tutorialStar'></span></span>  ADVISOR <span id='tutorialStep'></span>  <span class="pointer" onclick='tutorial.next()'><span class='icomoon icon-star tutorialStar'></span><span id="tutorialNextBtn" class='icomoon icon-arrow-right'></span></span></div>
 			<hr/>
 			<div id="tutorialText"><div id="tutorialTextInner" class="niceScroll"></div></div>
@@ -1318,7 +1326,7 @@
 			<div id="tutorialGoal"></div>
 		</div>
 	</div>
-	<table style='position: absolute; display: block; width: 20vw; left: 80%; top: 50%; background-color: grey; z-index: 99' id="screenReaderSummary">
+	<table role="presentation" style='position: absolute; display: block; width: 20vw; left: 80%; top: 50%; background-color: grey; z-index: 99' id="screenReaderSummary" >
 		<tbody>
 			<tr>
 				<td>
@@ -1335,6 +1343,7 @@
 					World Cell: <span id='srSumWorldCell'></span>
 				</td>
 			</tr>
+			
 			<tr>
 				<td id='srSumMapNameContainer'>
 					Current Map: <span id='srSumMapName'></span>
@@ -1365,7 +1374,7 @@
 					Health: <span id='srSumHealthScore'></span>
 				</td>
 			</tr>
-			<tr>
+			<tr id="srSumBlockContainer">
 				<td>
 					Block: <span id='srSumBlock'></span>
 				</td>
@@ -1415,6 +1424,21 @@
 					Last story: <span id='srSumLastStory'></span>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					World Time: <span id='srSumWorldTime'></span>
+				</td>
+			</tr>
+			<tr id='srSumMapTimeContainer'>
+				<td>
+					Current Map Time: <span id='srSumMapTime'></span>
+				</td>
+			</tr>
+			<tr id='srSumVoidMapContainer'>
+				<td>
+					Void Maps: <span id='srSumVoidMap'></span>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	<div style='position: absolute; display: block; width: 15vw; left: 85%; top: 90%; background-color: grey; z-index: 99' id="screenReaderTooltip" aria-live="assertive"></div>
@@ -1445,7 +1469,7 @@
 				<td class="btn btn-new" onclick="window.open('updates.html', '_blank')">
 						V <span id="versionNumber"></span> | What's New 
 				</td>
-				<td id="portalTimer" class="timerNotPaused" onclick="toggleSetting('pauseGame')" onmouseover="tooltip('Pause the game', 'customText', event, game.options.menu['pauseGame'].description)" onmouseout="tooltip('hide')">
+				<td  id="portalTimer" class="timerNotPaused" onclick="toggleSetting('pauseGame')" >
 					<span id="portalTime">&nbsp;</span>&nbsp;&nbsp;<span style='font-size: 0.85em; line-height: 0.85em;' class='icomoon icon-pause3'></span>&nbsp;
 				</td>
 			</tr>
@@ -1453,19 +1477,19 @@
 		<div id="settingsHere" style="display: none">
 			<div id='searchSettingsWindow'>
 				<div id='settingTitleBar'>
-					<div class='noselect optionContainer settingsBtn tealColor settingTypeBtn' onclick='toggleSettingSection(false)'>Browse All</div>
+					<button class='noselect optionContainer settingsBtn tealColor settingTypeBtn' onclick='toggleSettingSection(false)'>Browse All</button>
 					<span id='searchSettingsTitle'>Choose a Category Below, or Search for a Setting/Keyword:</span>&nbsp;
 					<input id='searchSettings' onkeyup='searchSettings(this)' /><br/>
 					<div id='settingsTabs'>
-						<ul class="nav nav-tabs nav-justified">
-							<li role="presentation" style='display: none' id='NewTab' onclick="settingTab('New')" class="tabNotSelected settingTab"><a>New</a></li>
-							<li role="presentation" id='GeneralTab' onclick="settingTab('General')" class="tabNotSelected settingTab"><a>General</a></li>
-							<li role="presentation" id='PerformanceTab' onclick="settingTab('Performance')" class="tabNotSelected settingTab"><a>Performance</a></li>
-							<li role="presentation"  id='QOLTab' onclick="settingTab('QOL')" class="tabNotSelected settingTab"><a>Quality of Life</a></li>
-							<li role="presentation"  id='AlertsTab' onclick="settingTab('Alerts')" class="tabNotSelected settingTab"><a>Pop-ups and Alerts</a></li>
-							<li role="presentation"  id='LayoutTab' onclick="settingTab('Layout')" class="tabNotSelected settingTab"><a>Layout</a></li>
-							<li role="presentation"  id='OtherTab' onclick="settingTab('Other')" class="tabNotSelected settingTab"><a>Other</a></li>
-							<li role="presentation"  id='HotkeyTab' onclick="tooltip('Hotkeys', null, 'update')" class="tabNotSelected settingTab"><a>Hotkeys</a></li>
+						<ul class="nav nav-tabs nav-justified" aria-label="Settings Tabs">
+							<li style='display: none' id='NewTab' onclick="settingTab('New')" class="tabNotSelected settingTab"><a>New</a></li>
+							<li id='GeneralTab' onclick="settingTab('General')" class="tabNotSelected settingTab"><a>General</a></li>
+							<li id='PerformanceTab' onclick="settingTab('Performance')" class="tabNotSelected settingTab"><a>Performance</a></li>
+							<li id='QOLTab' onclick="settingTab('QOL')" class="tabNotSelected settingTab"><a>Quality of Life</a></li>
+							<li id='AlertsTab' onclick="settingTab('Alerts')" class="tabNotSelected settingTab"><a>Pop-ups and Alerts</a></li>
+							<li id='LayoutTab' onclick="settingTab('Layout')" class="tabNotSelected settingTab"><a>Layout</a></li>
+							<li id='OtherTab' onclick="settingTab('Other')" class="tabNotSelected settingTab"><a>Other</a></li>
+							<li id='HotkeyTab' onclick="tooltip('Hotkeys', null, 'update')" class="tabNotSelected settingTab"><a>Hotkeys</a></li>
 						</ul>
 					</div>
 				</div>					
@@ -1496,11 +1520,11 @@
 	<script type="text/javascript" src="Playfab/PlayFabSDK/PlayFabClientApi.js"></script>
 	<script type="text/javascript" src="lz-string.js"></script>
 	<script type="text/javascript" src="decimal.min.js"></script>
-	<script type="text/javascript" src="config.js?60"></script>
-	<script type="text/javascript" src="updates.js?60"></script>
-	<script type="text/javascript" src="playerSpire.js?60"></script>
-	<script type="text/javascript" src="objects.js?60"></script>
-	<script type="text/javascript" src="main.js?60"></script>
+	<script type="text/javascript" src="config.js?62"></script>
+	<script type="text/javascript" src="updates.js?62"></script>
+	<script type="text/javascript" src="playerSpire.js?62"></script>
+	<script type="text/javascript" src="objects.js?62"></script>
+	<script type="text/javascript" src="main.js?62"></script>
 	
 </body>
 

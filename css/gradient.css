@@ -74,7 +74,7 @@
 	background-image: -webkit-linear-gradient(top, #845def 0%,#7251d6 100%) !important;
   }
 
-  .spireCell.cellColorNotBeaten
+  .spireCell.cellColorNotBeaten:not(.mutatedCell)
   {
 	background-image: -webkit-linear-gradient(top, #9b96b7 0%,#85819e 100%) !important;
   }

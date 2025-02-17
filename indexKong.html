@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
 
-	<title>Trimps 5.9.2 (Kongregate Version)</title>
+	<title>Trimps 5.10.1 (Kongregate Version)</title>
 	<meta name="description" content="Trimps">
 	<meta name="author" content="Greensatellite">
     <link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css?38" />
+    <link rel="stylesheet" type="text/css" href="css/style.css?39" />
 <script type="text/javascript">
 var kongregate = parent.kongregateAPI.getAPI();
 </script>
 </head>
 <!-- 		Trimps
-		Copyright (C) 2023 Zach Hood
+		Copyright (C) 2025 Zach Hood
 
 		This program is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
@@ -584,8 +584,9 @@ var kongregate = parent.kongregateAPI.getAPI();
 											<span id="upgradesTitleSpan" class="titleSpan">Upgrades<br/>(Research first)</span>
 										</div>
 										<div class="col-xs-3 lowPad">								
-											<div id="autoGoldenBtn" onmouseover="tooltip('AutoGold', null, event)" onmouseout="tooltip('hide')" class="pointer noselect settingBtn0 autoUpgradeBtn">
+											<div id="autoGoldenBtn" onmouseover="tooltip('AutoGold', null, event)" onmouseout="tooltip('hide')" class="pointer noselect settingBtn0 autoUpgradeBtn toggleConfigBtn">
 												<div id='autoGoldenText' onclick="toggleAutoGolden()">AutoGold</div>
+												<div id="goldConfig" aria-label="Configure Auto Golden" onclick="archoGolden.popup()"><span class="glyphicon glyphicon-cog"></span></div>
 											</div>
 										</div>
 										<div class="col-xs-3 lowPad">
@@ -1359,7 +1360,7 @@ var kongregate = parent.kongregateAPI.getAPI();
 			<div class='heirloomChanceBtnContainer'><span id="heirloomChanceLeft" onclick="changeHeirloomRarityRange(-1)" class='icomoon icon-arrow-left'></span></div><div id="heirloomRarityMain"></div><div class='heirloomChanceBtnContainer'><span id="heirloomChanceRight" class='icomoon icon-arrow-right' onclick="changeHeirloomRarityRange(1)"></span></div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-xs-6" id="heirloomSelections">
 				<div id="equippedHeirlooms">
 					<div class="row">
 						<div id='ShieldEquippedContainer' class="col-xs-6 heirloomEquippedContainer">
@@ -1490,11 +1491,11 @@ var kongregate = parent.kongregateAPI.getAPI();
 	<script type="text/javascript" src="Playfab/PlayFabSDK/PlayFabClientApi.js"></script>
 	<script type="text/javascript" src="lz-string.js"></script>
 	<script type="text/javascript" src="decimal.min.js"></script>
-	<script type="text/javascript" src="config.js?60"></script>
-	<script type="text/javascript" src="updates.js?60"></script>
-	<script type="text/javascript" src="playerSpire.js?60"></script>
-	<script type="text/javascript" src="objects.js?60"></script>
-	<script type="text/javascript" src="main.js?60"></script>
+	<script type="text/javascript" src="config.js?62"></script>
+	<script type="text/javascript" src="updates.js?62"></script>
+	<script type="text/javascript" src="playerSpire.js?62"></script>
+	<script type="text/javascript" src="objects.js?62"></script>
+	<script type="text/javascript" src="main.js?62"></script>
 	<script type="text/javascript">
 		document.body.addEventListener('DOMMouseScroll', onWheel, true);
 		document.body.addEventListener('mousewheel', onWheel, true);
