@@ -63,8 +63,11 @@ function updateTurboButtons() {
         const averageDelta = deltaHistory.reduce((l,r) => l+r) / 10;
 
         if (averageDelta > 100 || delta > 150) {
-            const factor = delta > 150 ? 0.8 : 100 / averageDelta;
-            window.turbo = (window.turbo * factor) | 0;
+            const factor = Math.max(
+                0.8,
+                delta > 150 ? 0.8 : 100 / averageDelta
+            );
+            window.turbo = Math.max(1, (window.turbo * factor) | 0);
             averageDelta.length = 0;
             updateTurboButtons();
         }
