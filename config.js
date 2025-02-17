@@ -28,7 +28,7 @@ var toReturn = {
 		isBeta: false,
 		betaV: 0,
 		killSavesBelow: 0.13,
-		uniqueId: new Date().getTime() + "" + Math.floor(Math.random() * 1e10),
+		uniqueId: getCurrentTimestamp() + "" + Math.floor(Math.random() * 1e10),
 		playerGathering: "",
 		playerModifier: 1,
 		buildingsQueue: [],
@@ -58,9 +58,9 @@ var toReturn = {
 		block: 0,
 		autoBattle: false,
 		autoCraftModifier: 0,
-		start: new Date().getTime(),
+		start: getCurrentTimestamp(),
 		time: 0,
-		portalTime: new Date().getTime(),
+		portalTime: getCurrentTimestamp(),
 		lastFightUpdate: "",
 		battleCounter: 0,
 		firing: false,
@@ -135,8 +135,8 @@ var toReturn = {
 		lastLowGen: 0,
 		presimptStore: "food",
 		lastWarp: 0,
-		zoneStarted: new Date().getTime(),
-		mapStarted: new Date().getTime(),
+		zoneStarted: getCurrentTimestamp(),
+		mapStarted: getCurrentTimestamp(),
 		bionicOwned: 0,
 		roboTrimpLevel: 0,
 		roboTrimpCooldown: 0,
@@ -267,7 +267,7 @@ var toReturn = {
 		genPaused: false,
 		canMapAtZone: false,
 		capTrimp: false,
-		lastSoldierSentAt: new Date().getTime(),
+		lastSoldierSentAt: getCurrentTimestamp(),
 		supervisionSetting: 100,
 		canScryCache: false,
 		waitToScry: false,
@@ -305,6 +305,7 @@ var toReturn = {
 		tutorialLg: false,
 		mazBw: -1,
 		expandingTauntimp: false,
+		turboCounter: 0,
 		lastHeirlooms: {
 			u1: {
 				Shield: -1,
@@ -850,13 +851,13 @@ var toReturn = {
 					this.lastChargeAt = -1;
 					return;
 				}
-				if (this.lastChargeAt == -1) this.lastChargeAt = new Date().getTime();
+				if (this.lastChargeAt == -1) this.lastChargeAt = getCurrentTimestamp();
 				var chargeMs = this.chargeTime();
-				var msSinceCharge = new Date().getTime() - this.lastChargeAt;
+				var msSinceCharge = getCurrentTimestamp() - this.lastChargeAt;
 				if (getTime){
 					var addPause = 0;
 					if (game.options.menu.pauseGame.enabled){
-						var now = new Date().getTime();
+						var now = getCurrentTimestamp();
 						addPause = now - game.options.menu.pauseGame.timeAtPause;
 					}
 					return chargeMs - msSinceCharge + addPause;
@@ -975,6 +976,7 @@ var toReturn = {
 				description: "When the game saves, every 30 minutes also back up a copy online with PlayFab. While using this setting, you will be asked if you want to download your online save if it is ever ahead of the version on your computer. You can also manually import your save from PlayFab through the Import menu.",
 				titles: ["Not Saving Online", "Saving with PlayFab"],
 				onToggle: function () {
+					return; // Disabled Playfab in Turbo Trimps fork
 					var indicatorElem = document.getElementById("playFabIndicator");
 					if (this.enabled == 1) indicatorElem.className = "icomoon icon-wifi iconStateGood";
 					else indicatorElem.className = "";
@@ -1920,13 +1922,13 @@ var toReturn = {
 				timeAtPause: 0,
 				onToggle: function () {
 					if (this.enabled) {
-						this.timeAtPause = new Date().getTime();
+						this.timeAtPause = getCurrentTimestamp();
 						if (game.options.menu.autoSave.enabled == 1 && game.options.menu.saveOnPause.enabled == 1) save(false, true);
 						swapClass("timer", "timerPaused", document.getElementById("portalTimer"));
 						handlePauseMessage(true);
 					}
 					else if (this.timeAtPause) {
-						var now = new Date().getTime();
+						var now = getCurrentTimestamp();
 						var dif = now - this.timeAtPause;
 						game.global.portalTime += dif;
 						game.global.lastSkeletimp += dif;
@@ -3118,7 +3120,7 @@ var toReturn = {
 			//in seconds
 			frenzyLeft: function(){
 				if (this.frenzyStarted == -1) return 0;
-				var timeSince = Math.floor((new Date().getTime() - this.frenzyStarted) / 1000);
+				var timeSince = Math.floor((getCurrentTimestamp() - this.frenzyStarted) / 1000);
 				var remaining = this.frenzyTime() - timeSince;
 				if (remaining <= 0) return 0;
 				return remaining;
@@ -3170,7 +3172,7 @@ var toReturn = {
 				var chance = this.radLevel;
 				var roll = Math.floor(Math.random() * 1000);
 				if (roll < chance){
-					this.frenzyStarted = new Date().getTime();
+					this.frenzyStarted = getCurrentTimestamp();
 					this.deathless = true;
 					this.drawStacks();
 				}
@@ -6401,7 +6403,7 @@ var toReturn = {
 				return (resOwned > 0);
 			},
 			value: function (useTemp) {
-				var timeThisPortal = new Date().getTime() - game.global.portalTime;
+				var timeThisPortal = getCurrentTimestamp() - game.global.portalTime;
 				if (timeThisPortal < 1) return 0;
 				timeThisPortal /= 3600000;
 				var resToUse;
@@ -6703,7 +6705,7 @@ var toReturn = {
 				return (Fluffy.getBestExpStat().value > 0);
 			},
 			value: function () {
-				var timeThisPortal = new Date().getTime() - game.global.portalTime;
+				var timeThisPortal = getCurrentTimestamp() - game.global.portalTime;
 				if (timeThisPortal < 1) return 0;
 				timeThisPortal /= 3600000;
 				return Math.floor(Fluffy.getBestExpStat().value / timeThisPortal);
@@ -9582,7 +9584,7 @@ var toReturn = {
 			loot: function () {
 				message("Your Trimps managed to pull 1 perfectly preserved bone from that Skeletimp!", "Loot", "italic", null, "bone");
 				game.global.b++;
-				game.global.lastSkeletimp = new Date().getTime();
+				game.global.lastSkeletimp = getCurrentTimestamp();
 				updateSkeleBtn();
 			}
 		},
@@ -9596,7 +9598,7 @@ var toReturn = {
 			loot: function () {
 				message("That was a pretty big Skeletimp. Your Trimps scavenged the remains and found 2 perfectly preserved bones!", "Loot", "italic", null, "bone");
 				game.global.b += 2;
-				game.global.lastSkeletimp  = new Date().getTime();
+				game.global.lastSkeletimp  = getCurrentTimestamp();
 				updateSkeleBtn();
 			}
 		}

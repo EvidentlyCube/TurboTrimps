@@ -4848,6 +4848,39 @@ background-color: rgba(255,255,255,0.25);
   color: #000;
 }
 
+
+.btn-no-turbo {
+  color: #000;
+  background-color: #FFCC00;
+  border-color: #FFFFCC;
+}
+
+.btn-no-turbo:hover,
+.btn-no-turbo:focus,
+.btn-no-turbo.focus,
+.btn-no-turbo:active,
+.btn-no-turbo.active,
+.open > .dropdown-toggle.btn-info {
+  color: #000;
+  background-color: #FF8800;
+}
+
+.btn-turbo {
+	color: #000;
+	background-color: #FF8888;
+	border-color: #FFCCCC;
+  }
+
+.btn-turbo:hover,
+.btn-turbo:focus,
+.btn-turbo.focus,
+.btn-turbo:active,
+.btn-turbo.active,
+.open > .dropdown-toggle.btn-info {
+color: #000;
+background-color: #FF0000;
+}
+
 .btn-new{
 	background: linear-gradient(90deg, rgba(27,11,171,1) 10%, rgba(5,5,5,1) 35%, rgba(194,16,187,1) 65%, rgba(171,172,12,1) 85%);
 	color: white;

@@ -284,7 +284,7 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		what = "";
 		if (getSelectedHeirloom(numCheck, attachFunction).rarity == 8){
 			ondisplay = function() {
-				document.getElementById('tooltipHeirloomIcon').style.animationDelay = "-" + ((new Date().getTime() / 1000) % 30).toFixed(1) + "s";
+				document.getElementById('tooltipHeirloomIcon').style.animationDelay = "-" + ((getCurrentTimestamp() / 1000) % 30).toFixed(1) + "s";
 			}
 		}
 		swapClass("tooltipExtra", "tooltipExtraHeirloom", elem);
@@ -324,6 +324,21 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		costText = "<div class='maxCenter'><div class='btn btn-info' id='confirmTooltipBtn' onclick='cancelTooltip(); toggleSetting(\"usePlayFab\");'>Enable Online Saving</div><div class='btn btn-danger' onclick='cancelTooltip()'>Don't Enable</div></div>";
 		elem.style.left = "33.75%";
 		elem.style.top = "25%";
+		{ /** TURBO TRIMPS INJECT START */
+			tooltipText = `<p>
+				<strong>Turbo Trimps</strong>
+				is an unofficial mod to the excellent
+				<a href="https://trimps.github.io/" title="Open the official Trimps page in a new window" target="_blank">Trimps</a>.
+				It adds a new <strong>Turbo</strong> option in the bottom bar, next to Settings. List of changes and quirks:
+			</p>`;
+			tooltipText += `<ul>
+				<li>Turbo can be set to No Turbo, x10, x60 and x100.</li>
+				<li>It speeds up every aspect of the game by making the game thing the time is just passing faster.</li>
+				<li>You can import save from base game and import Turbo save into base game, but some time related things will behave wonky until you portal.</li>
+				<li>PlayFab login is disabled.</li>
+			</ul>`
+			costText = "<div class='maxCenter'><div class='btn btn-danger' onclick='cancelTooltip()'>Close</div></div>";
+		} /** TURBO TRIMPS INJECT END */
 	}
 	if (what == "Trustworthy Trimps"){	
 		if (usingScreenReader){
@@ -1414,6 +1429,12 @@ function tooltip(what, isItIn, event, textString, attachFunction, numCheck, rena
 		elem.style.top = "15%";
 		elem.style.left = "25%";
 		swapClass('tooltipExtra', 'tooltipExtraLg', elem);
+		{ /** TURBO TRIMPS INJECT START */
+			tooltipText = "PlayFab login is disabled in this mod.";
+			costText = "<div class='maxCenter'><div class='btn btn-danger' onclick='cancelTooltip()'>Close</div></div>";
+			game.global.lockTooltip = true;
+			elem.style.top = "40%";
+		} /** TURBO TRIMPS INJECT END */
 		noExtraCheck = true;
 	}
 	if (what == "PlayFab Conflict"){
@@ -4690,7 +4711,7 @@ function resetGame(keepPortal, resetting) {
 	document.getElementById("energyShield").style.width = "0%";
 	document.getElementById("energyShieldLayer").style.width = "0%";
 	if (getAutoGoldenSetting() != -1)
-		lastAutoGoldenToggle = new Date().getTime();
+		lastAutoGoldenToggle = getCurrentTimestamp();
 	if (game.talents.voidSpecial.purchased){
 		var mapsToGive = Math.floor(getLastPortal() / 100);
 		if (game.talents.voidSpecial2.purchased) mapsToGive += Math.floor((getLastPortal() + 50) / 100);
@@ -4975,7 +4996,7 @@ function postMessages(){
 }
 
 function getCurrentTime(){
-	var date = new Date();
+	var date = getCurrentDate();
 	var seconds = date.getSeconds();
 	var minutes = date.getMinutes();
 	var hours = date.getHours();
@@ -5516,7 +5537,7 @@ function updateSideTrimps(){
 }
 
 function unlockBuilding(what) {
-	game.global.lastUnlock = new Date().getTime();
+	game.global.lastUnlock = getCurrentTimestamp();
 	var building = game.buildings[what];
 	if (building.locked == 1) building.alert = true;
 	building.locked = 0;
@@ -5549,7 +5570,7 @@ function drawBuilding(what, where){
 }
 
 function unlockJob(what) {
-	game.global.lastUnlock = new Date().getTime();
+	game.global.lastUnlock = getCurrentTimestamp();
 	var job = game.jobs[what];
 	if (job.locked == 1) job.alert = true;
 	job.locked = 0;
@@ -5692,7 +5713,7 @@ function getMapSpecTag(modifier){
 }
 
 function unlockUpgrade(what, displayOnly) {
-	if (!displayOnly) game.global.lastUnlock = new Date().getTime();
+	if (!displayOnly) game.global.lastUnlock = getCurrentTimestamp();
 	if (getAvailableGoldenUpgrades() >= 1) displayGoldenUpgrades(true);
 	var upgrade = game.upgrades[what];
 	upgrade.locked = 0;
@@ -5816,7 +5837,7 @@ function updateButtonColor(what, canAfford, isJob) {
 	if (elem === null){
 		return;
 	}
-	if (game.options.menu.lockOnUnlock.enabled == 1 && (new Date().getTime() - 1000 <= game.global.lastUnlock)) canAfford = false;
+	if (game.options.menu.lockOnUnlock.enabled == 1 && (getCurrentTimestamp() - 1000 <= game.global.lastUnlock)) canAfford = false;
 	if (game.global.challengeActive == "Archaeology" && game.upgrades[what] && game.upgrades[what].isRelic){
 		var className = "thingColor" + ((canAfford) ? "CanAfford" : "CanNotAfford");
 		var nextAuto = game.challenges.Archaeology.checkAutomator();
@@ -5864,7 +5885,7 @@ function getWarpstationColor() {
 }
 
 function unlockEquipment(what, fromCheck) {
-	game.global.lastUnlock = new Date().getTime();
+	game.global.lastUnlock = getCurrentTimestamp();
 	var equipment = game.equipment[what];
 	equipment.locked = 0;
 	if (!fromCheck){
@@ -6075,8 +6096,8 @@ function toggleSetting(setting, elem, fromPortal, updateOnly, backwards, fromHot
 	}
 	if (setting == "pauseGame"){
 		if (game.options.menu.disablePause.enabled == 0) return;
-		if (new Date().getTime() - lastPause < 110) return;
-		lastPause = new Date().getTime();
+		if (getCurrentTimestamp() - lastPause < 110) return;
+		lastPause = getCurrentTimestamp();
 	}
 	var menuOption = game.options.menu[setting];
 	if (setting == "mapAtZone" && !updateOnly && (menuOption.enabled == 0 || fromHotkey)){

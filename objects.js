@@ -22,7 +22,7 @@ var holidayObj = {
         return (this.holiday == name);
     },
     checkAll: function(){
-        var date = new Date();
+        var date = getCurrentDate();
         if (this.lastCheck != null && ((date.getTime() - this.lastCheck.getTime()) < 120000)) return;
         this.lastCheck = date;
         var day = date.getUTCDate();

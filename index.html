@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-	<title>Trimps 5.9.2</title>
+	<title>Trimps 5.9.2 (Turbo Trimps Fork)</title>
 	<meta name="description" content="Trimps">
 	<meta name="author" content="Greensatellite">
 	<link rel="stylesheet" href="css/bootstrap.css">
@@ -1019,6 +1019,9 @@
 					<td class="btn btn-default" onclick="toggleSettingsMenu()">
 						<div id='settingsText'>Settings</div>
 					</td>
+					<td class="btn btn-no-turbo" onclick="toggleTurbo()">
+						<div id="turboButtonText">No Turbo</div>
+					</td>
 					<td class="btn" id="pastUpgradesBtn" onclick="viewPortalUpgrades()">
 						
 					</td>
@@ -1384,7 +1387,10 @@
 			&nbsp;
 		</div>
 	</div>
+	<!--
 	<script type="text/javascript" src="Playfab/PlayFabSDK/PlayFabClientApi.js"></script>
+	-->
+	<script type="text/javascript" src="turboTime.js"></script>
 	<script type="text/javascript" src="lz-string.js"></script>
 	<script type="text/javascript" src="decimal.min.js"></script>
 	<script type="text/javascript" src="config.js?60"></script>
