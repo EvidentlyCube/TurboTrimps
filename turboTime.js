@@ -53,7 +53,7 @@ function updateTurboButtons() {
 (function() {
     let lastTurboTick = Date.now();
     let deltaHistory = [];
-    setInterval(() => {
+    let callback = () => {
         let delta = Date.now() - lastTurboTick;
         deltaHistory.push(delta);
         while(deltaHistory.length > 10) {
@@ -72,5 +72,9 @@ function updateTurboButtons() {
         if (window.game) {
             game.global.turboCounter += delta * (window.turbo - 1);
         }
-    }, 1);
+
+        setTimeout(callback, 1);
+    }
+
+    setTimeout(callback, 1);
 })()
