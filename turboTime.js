@@ -50,6 +50,7 @@ function updateTurboButtons() {
     let deltaHistory = [];
     let callback = () => {
         if (!window.game) {
+            setTimeout(callback, 1);
             return;
         }
 
