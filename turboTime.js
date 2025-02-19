@@ -49,8 +49,12 @@ function updateTurboButtons() {
     let lastTurboTick = Date.now();
     let deltaHistory = [];
     let callback = () => {
+        if (!game) {
+            return;
+        }
+
         let delta = Date.now() - lastTurboTick;
-        if (game && game.options.menu.turboSlowdown.enabled === 1 && delta > 10) {
+        if (game.options.menu.turboSlowdown.enabled === 1 && delta > 10) {
             deltaHistory.push(delta);
             while(deltaHistory.length > 10) {
                 deltaHistory.shift();
@@ -70,8 +74,25 @@ function updateTurboButtons() {
         }
 
         lastTurboTick += delta;
-        if (window.game) {
-            game.global.turboCounter += delta * (window.turbo - 1);
+
+        let turboAdjustedDelta = delta * (window.turbo - 1)
+        game.global.turboCounter += turboAdjustedDelta;
+
+        let attempts = 0;
+        while (true) {
+            if (attempts++ > 1000) {
+                break;
+            }
+            const accumulatedTime = getCurrentTimestamp() - game.global.start - game.global.time;
+            const turboAdjustedAccumulation = accumulatedTime / window.turbo;
+
+            if (turboAdjustedAccumulation > 200) {
+                game.global.turboCounter -= turboAdjustedDelta;
+                turboAdjustedDelta *= 0.75;
+                game.global.turboCounter += turboAdjustedDelta;
+            } else {
+                break;
+            }
         }
 
         setTimeout(callback, 1);
