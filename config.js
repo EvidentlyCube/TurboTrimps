@@ -1726,6 +1726,18 @@ var toReturn = {
 					return (holidayObj.checkActive("Pumpkimp"));
 				}
 			},
+			/** TURBO TRIMPS INJECT START */
+				turboSlowdown: {
+					enabled: 1,
+					extraTags: "general",
+					get description(){
+						return "<p><b>Turbo Dynamic</b> causes the turbo to automatically slow down if too much is going on at once</p>";
+					},
+					get titles () {
+						return ['Turbo Static', "Turbo Dynamic"];
+					}
+				},
+			/** TURBO TRIMPS INJECT END */
 			geneSend: {
 				enabled: 0,
 				locked: true,

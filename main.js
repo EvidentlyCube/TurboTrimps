@@ -3994,7 +3994,18 @@ function activatePortal(){
 			}
 	}
 
-	game.global.turboCounter = 0;
+	{ /** TURBO TRIMPS INJECT START */
+		// Since turbo counter gets reset then skeletimp last time
+		// also needs to go back in time by the turbo counter, otherwise
+		// you'll need to wait longer for the next skeletimp than expected
+		game.global.lastSkeletimp -= game.global.turboCounter;
+		game.global.turboCounter = 0;
+
+		// Fix bad past data
+		if (game.global.lastSkeletimp > Date.now() + 60000) {
+			game.global.lastSkeletimp = Date.now();
+		}
+	} /** TURBO TRIMPS INJECT END */
 
 	if (game.global.challengeActive == "Daily"){
 		abandonDaily();
