@@ -50,7 +50,7 @@ function updateTurboButtons() {
     let deltaHistory = [];
     let callback = () => {
         let delta = Date.now() - lastTurboTick;
-        if (game.options.menu.turboSlowdown.enabled === 1 && delta > 10) {
+        if (game && game.options.menu.turboSlowdown.enabled === 1 && delta > 10) {
             deltaHistory.push(delta);
             while(deltaHistory.length > 10) {
                 deltaHistory.shift();
