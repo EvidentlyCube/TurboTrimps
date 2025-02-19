@@ -49,7 +49,7 @@ function updateTurboButtons() {
     let lastTurboTick = Date.now();
     let deltaHistory = [];
     let callback = () => {
-        if (!game) {
+        if (!window.game) {
             return;
         }
 
